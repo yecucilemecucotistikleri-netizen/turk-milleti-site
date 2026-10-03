@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TÜRK MİLLETİ 🇹🇷</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+/* ÜST MENÜ */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #b30000;
+    color: white;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: #ffd700;
+}
+
+/* DÖNEM SEÇİCİ */
+.period-selector {
+    margin-top: 72px;
+    background: #222;
+    padding: 18px;
+    text-align: center;
+}
+
+.period-selector button {
+    border: none;
+    padding: 13px 25px;
+    margin: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.turkiye-btn {
+    background: #e30613;
+    color: white;
+}
+
+.osmanli-btn {
+    background: #c9a227;
+    color: #111;
+}
+
+.oyun-btn {
+    background: #333;
+    color: #ffd700;
+}
+
+.period-selector button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* HERO */
+.hero {
+    min-height: 75vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        linear-gradient(135deg, #b30000, #111);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 21px;
+    max-width: 800px;
+}
+
+/* GENEL BÖLÜMLER */
+section {
+    padding: 70px 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 35px;
+}
+
+/* KARTLAR */
+.card {
+    background: white;
+    padding: 30px;
+    margin: 25px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+    color: #b30000;
+    margin-bottom: 15px;
+    font-size: 27px;
+}
+
+.card p {
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+audio {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* ========================= */
+/* 🇹🇷 TÜRKİYE SİYAH TEMA */
+/* ========================= */
+
+#turkiye {
+    background: #181818;
+    color: white;
+}
+
+#turkiye #ataturk {
+    background: #181818;
+}
+
+#turkiye #istiklal {
+    background: #181818;
+}
+
+#turkiye #inonu {
+    background: #181818;
+}
+
+#turkiye #kurtulus {
+    background: #181818;
+}
+
+#turkiye h2 {
+    color: #e30613;
+}
+
+#turkiye .card {
+    background: #262626;
+    color: white;
+    border-left: 5px solid #b30000;
+}
+
+#turkiye .card h3 {
+    color: #e30613;
+}
+
+#turkiye .card p {
+    color: #ddd;
+}
+
+#turkiye .timeline {
+    border-left: 5px solid #b30000;
+}
+
+#turkiye .timeline-item h3 {
+    color: #e30613;
+}
+
+/* ========================= */
+/* OSMANLI */
+/* ========================= */
+
+.osmanli-section {
+    background: #181818;
+    color: white;
+}
+
+.osmanli-section h2 {
+    color: #d4af37;
+}
+
+.osmanli-card {
+    background: #262626;
+    border-left: 5px solid #d4af37;
+}
+
+.osmanli-card h3 {
+    color: #d4af37;
+}
+
+/* OSMANLI ZAMAN ÇİZELGESİ */
+.osmanli-timeline {
+    border-left: 5px solid #d4af37;
+    padding-left: 25px;
+}
+
+.osmanli-timeline .timeline-item h3 {
+    color: #d4af37;
+}
+
+/* ========================= */
+/* 🎮 OYUNLAR */
+/* ========================= */
+
+#oyunlar {
+    background: linear-gradient(135deg, #101010, #292929);
+    color: white;
+}
+
+#oyunlar h2 {
+    color: #ffd700;
+}
+
+.game-card {
+    max-width: 900px;
+    margin: auto;
+    background: linear-gradient(145deg, #1c1c1c, #333);
+    border: 2px solid #b30000;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    text-align: center;
+}
+
+.game-icon {
+    font-size: 70px;
+    margin-bottom: 10px;
+}
+
+.game-card h3 {
+    font-size: 30px;
+    color: #ff3333;
+    margin-bottom: 12px;
+}
+
+.game-badge {
+    display: inline-block;
+    background: #b30000;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.game-card p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #ddd;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.game-info-box {
+    background: #111;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.game-info-box strong {
+    display: block;
+    color: #ffd700;
+    margin-bottom: 7px;
+}
+
+.controls {
+    background: #111;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.controls h4 {
+    color: #ffd700;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.game-button {
+    display: inline-block;
+    background: #b30000;
+    color: white;
+    text-decoration: none;
+    padding: 15px 28px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.game-button:hover {
+    background: #e00000;
+    transform: scale(1.05);
+}
+
+.game-note {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* GİZLİ */
+.hidden {
+    display: none !important;
+}
+
+/* MOBİL */
+@media (max-width: 800px) {
+
+    header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .period-selector {
+        margin-top: 120px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    section h2 {
+        font-size: 30px;
+    }
+
+    .game-info {
+        grid-template-columns: 1fr;
+    }
+
+    .game-card {
+        padding: 25px 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- ÜST MENÜ -->
+<!-- ========================= -->
+
+<header>
+
+    <div class="logo">
+        🇹🇷 TÜRK MİLLETİ
+    </div>
+
+    <nav>
+
+        <a onclick="showAnaSayfa()">
+            Ana Sayfa
+        </a>
+
+        <a onclick="showTurkiye()">
+            Türkiye
+        </a>
+
+        <a onclick="showOsmanli()">
+            Osmanlı
+        </a>
+
+        <a onclick="showOyunlar()">
+            🎮 Oyunlar
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ========================= -->
+<!-- BUTONLAR -->
+<!-- ========================= -->
+
+<div class="period-selector">
+
+    <button
+        class="turkiye-btn"
+        onclick="showTurkiye()"
+    >
+        🇹🇷 Türkiye Cumhuriyeti
+    </button>
+
+    <button
+        class="osmanli-btn"
+        onclick="showOsmanli()"
+    >
+        ☪️ Osmanlı Devleti
+    </button>
+
+    <button
+        class="oyun-btn"
+        onclick="showOyunlar()"
+    >
+        🎮 Oyunlar
+    </button>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- ANA SAYFA -->
+<!-- ========================= -->
+
+<div id="anasayfa">
+
+    <section class="hero">
+
+        <h1>TÜRK MİLLETİ 🇹🇷</h1>
+
+        <p>
+            Türk tarihinin önemli dönemlerini, kahramanlarını,
+            mücadelelerini ve kültürel mirasını keşfet.
+        </p>
+
+    </section>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- 🎮 OYUNLAR -->
+<!-- ========================= -->
+
+<div id="oyunlar" class="hidden">
+
+    <section>
+
+        <div class="container">
+
+            <h2>🎮 OYUNLAR</h2>
+
+            <div class="game-card">
+
+                <div class="game-icon">
+                    🎮
+                </div>
+
+                <span class="game-badge">
+                    💻 PC İÇİN
+                </span>
+
+                <h3>
+                    Mustafa Kemal Atatürk 3D Bilgi Oyunu
+                </h3>
+
+                <p>
+                    Mustafa Kemal Atatürk ve Türk tarihi hakkında
+                    hazırlanmış 3D FPS tarzı bilgi oyunu.
+                    Soruları cevaplamak için A veya B kapılarından
+                    doğru olanı seç.
+                </p>
+
+                <div class="game-info">
+
+                    <div class="game-info-box">
+                        <strong>🎯 Soru</strong>
+                        50 bilgi sorusu
+                    </div>
+
+                    <div class="game-info-box">
+                        <strong>🚪 Sistem</strong>
+                        A / B kapıları
+                    </div>
+
+                    <div class="game-info-box">
+                        <strong>🏆 Kontrol Noktası</strong>
+                        Her 5 soruda
+                    </div>
+
+                </div>
+
+                <div class="controls">
+
+                    <h4>
+                        ⌨️ Kontroller
+                    </h4>
+
+                    <p>
+                        <b>W A S D</b> → Hareket<br>
+                        <b>Mouse</b> → Etrafa bak<br>
+                        <b>ESC</b> → Oyundan çık
+                    </p>
+
+                </div>
+
+                <a
+                    class="game-button"
+                    href="TurkMilleti.exe"
+                    download
+                >
+                    💻 PC OYUNUNU İNDİR
+                </a>
+
+                <p class="game-note">
+                    ⚠️ Bu buton oyunun PC dosyasını indirir.
+                    Oyun tarayıcı içinde değil, bilgisayarda çalıştırılır.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- 🇹🇷 TÜRKİYE CUMHURİYETİ -->
+<!-- ========================= -->
+
+<div id="turkiye" class="hidden">
+
+    <!-- ATATÜRK -->
+
+    <section id="ataturk">
+
+        <div class="container">
+
+            <h2>
+                🇹🇷 Mustafa Kemal Atatürk
+            </h2>
+
+            <div class="card">
+
+                <h3>
+                    Gazi Mustafa Kemal Atatürk
+                </h3>
+
+                <p>
+                    Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin
+                    kurucusu ve ilk Cumhurbaşkanıdır.
+                    Kurtuluş Savaşı'nın önderliğini yapmış ve
+                    Cumhuriyet'in kurulmasına öncülük etmiştir.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- İSTİKLAL MARŞI -->
+
+    <section id="istiklal">
+
+        <div class="container">
+
+            <h2>
+                🇹🇷 İstiklâl Marşı
+            </h2>
+
+            <div class="card">
+
+                <h3>
+                    Türkiye Cumhuriyeti İstiklâl Marşı
+                </h3>
+
+                <p>
+                    Mehmet Âkif Ersoy tarafından yazılan
+                    İstiklâl Marşı, Türkiye Cumhuriyeti'nin
+                    millî marşıdır.
+                </p>
+
+                <audio controls>
+
+                    <source
+                        src="istiklal-marsi.mp3"
+                        type="audio/mpeg"
+                    >
+
+                    Tarayıcınız ses oynatmayı desteklemiyor.
+
+                </audio>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- İNÖNÜ -->
+
+    <section id="inonu">
+
+        <div class="container">
+
+            <h2>
+                🇹🇷 İsmet İnönü
+            </h2>
+
+            <div class="card">
+
+                <h3>
+                    İsmet İnönü
+                </h3>
+
+                <p>
+                    İsmet İnönü, Kurtuluş Savaşı döneminde
+                    önemli görevler üstlenmiş, Türkiye Cumhuriyeti'nin
+                    ikinci Cumhurbaşkanı olarak görev yapmıştır.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KURTULUŞ SAVAŞI -->
+
+    <section id="kurtulus">
+
+        <div class="container">
+
+            <h2>
+                ⚔️ Kurtuluş Savaşı
+            </h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1919 — Samsun
+                    </h3>
+
+                    <p>
+                        Mustafa Kemal Paşa'nın Samsun'a çıkışı,
+                        Millî Mücadele'nin başlangıcında önemli
+                        bir dönüm noktası oldu.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1920 — TBMM
+                    </h3>
+
+                    <p>
+                        Türkiye Büyük Millet Meclisi Ankara'da
+                        açıldı.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1921 — Sakarya
+                    </h3>
+
+                    <p>
+                        Sakarya Meydan Muharebesi kazanıldı.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1922 — Büyük Taarruz
+                    </h3>
+
+                    <p>
+                        Büyük Taarruz ve Başkomutanlık Meydan
+                        Muharebesi ile Millî Mücadele'nin askerî
+                        safhasında belirleyici başarı elde edildi.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1923 — Cumhuriyet
+                    </h3>
+
+                    <p>
+                        Türkiye Cumhuriyeti ilan edildi.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- ☪️ OSMANLI DEVLETİ -->
+<!-- ========================= -->
+
+<div id="osmanli" class="hidden">
+
+    <section class="osmanli-section">
+
+        <div class="container">
+
+            <h2>
+                ☪️ Osmanlı Devleti
+            </h2>
+
+
+            <div class="card osmanli-card">
+
+                <h3>
+                    Fatih Sultan Mehmet
+                </h3>
+
+                <p>
+                    Fatih Sultan Mehmet, 1453 yılında
+                    İstanbul'u fethederek Osmanlı tarihinin
+                    önemli hükümdarlarından biri olmuştur.
+                </p>
+
+            </div>
+
+
+            <div class="card osmanli-card">
+
+                <h3>
+                    Yavuz Sultan Selim
+                </h3>
+
+                <p>
+                    Yavuz Sultan Selim, Osmanlı Devleti'nin
+                    dokuzuncu padişahıdır. Kısa süren saltanatı
+                    döneminde devletin topraklarını önemli ölçüde
+                    genişletmiştir.
+                </p>
+
+            </div>
+
+
+            <div class="card osmanli-card">
+
+                <h3>
+                    🎵 Ceddin Deden
+                </h3>
+
+                <p>
+                    Osmanlı dönemini ve Türk askerî tarihini
+                    konu alan eserlerden biri olan Ceddin Deden'i
+                    buradan dinleyebilirsin.
+                </p>
+
+                <audio controls>
+
+                    <source
+                        src="ceddin-deden.mp3"
+                        type="audio/mpeg"
+                    >
+
+                    Tarayıcınız ses oynatmayı desteklemiyor.
+
+                </audio>
+
+            </div>
+
+
+            <!-- OSMANLI ZAMAN ÇİZELGESİ -->
+
+            <h2>
+                📜 Osmanlı Zaman Çizelgesi
+            </h2>
+
+            <div class="osmanli-timeline">
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1299 — Osmanlı'nın Kuruluşu
+                    </h3>
+
+                    <p>
+                        Osmanlı Beyliği'nin ortaya çıkışı.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1453 — İstanbul'un Fethi
+                    </h3>
+
+                    <p>
+                        Fatih Sultan Mehmet İstanbul'u fethetti.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1517 — Mısır Seferi
+                    </h3>
+
+                    <p>
+                        Yavuz Sultan Selim döneminde Osmanlı'nın
+                        Mısır ve çevresindeki hâkimiyeti genişledi.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1922 — Saltanatın Kaldırılması
+                    </h3>
+
+                    <p>
+                        Osmanlı saltanatı kaldırıldı.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+    <p>
+        🇹🇷 TÜRK MİLLETİ 🇹🇷
+    </p>
+
+    <p>
+        Türk tarihine ve kültürüne saygıyla.
+    </p>
+
+</footer>
+
+
+<!-- ========================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+function hideAll() {
+
+    document.getElementById("anasayfa")
+        .classList.add("hidden");
+
+    document.getElementById("turkiye")
+        .classList.add("hidden");
+
+    document.getElementById("osmanli")
+        .classList.add("hidden");
+
+    document.getElementById("oyunlar")
+        .classList.add("hidden");
+}
+
+
+function showAnaSayfa() {
+
+    hideAll();
+
+    document.getElementById("anasayfa")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function showTurkiye() {
+
+    hideAll();
+
+    document.getElementById("turkiye")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function showOsmanli() {
+
+    hideAll();
+
+    document.getElementById("osmanli")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function showOyunlar() {
+
+    hideAll();
+
+    document.getElementById("oyunlar")
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
