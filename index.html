@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TÜRK MİLLETİ 🇹🇷</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #b30000;
+    padding: 16px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 15px rgba(0,0,0,.3);
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffdada;
+}
+
+/* ÜLKE / DÖNEM SEÇİMİ */
+
+.period-selector {
+    margin-top: 105px;
+    padding: 20px;
+    background: #111;
+    text-align: center;
+}
+
+.period-selector h3 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.period-button {
+    border: none;
+    padding: 13px 25px;
+    margin: 5px;
+    border-radius: 8px;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.period-button:hover {
+    background: #b30000;
+}
+
+.period-button.active {
+    background: #b30000;
+    box-shadow: 0 0 12px rgba(255,255,255,.25);
+}
+
+/* ANA SAYFA */
+
+.hero {
+    min-height: 100vh;
+    padding: 150px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #730000, #d40000);
+}
+
+.hero h1 {
+    font-size: 75px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 800px;
+    font-size: 21px;
+    line-height: 1.7;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 15px 35px;
+    background: white;
+    color: #b30000;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 100px 8%;
+}
+
+section h2 {
+    text-align: center;
+    color: #b30000;
+    font-size: 42px;
+    margin-bottom: 45px;
+}
+
+.card {
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.12);
+}
+
+.card h3 {
+    color: #b30000;
+    font-size: 28px;
+    margin-bottom: 18px;
+}
+
+.card p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.audio-box {
+    margin-top: 30px;
+    padding: 25px;
+    background: #eeeeee;
+    border-radius: 12px;
+    text-align: center;
+}
+
+audio {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.timeline {
+    max-width: 900px;
+    margin: auto;
+}
+
+.event {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-left: 7px solid #b30000;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.1);
+}
+
+.event h3 {
+    color: #b30000;
+    margin-bottom: 10px;
+}
+
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 35px;
+}
+
+/* OSMANLI BÖLÜMÜ */
+
+.osmanli-banner {
+    background: linear-gradient(135deg, #171717, #4b3500);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.osmanli-banner h2 {
+    color: #e5c76b;
+    margin-bottom: 15px;
+}
+
+.osmanli-banner p {
+    max-width: 800px;
+    margin: auto;
+    font-size: 19px;
+    line-height: 1.7;
+}
+
+.osmanli-card {
+    border-left: 7px solid #8a6d1d;
+}
+
+.osmanli-card h3 {
+    color: #80651b;
+}
+
+/* GİZLEME */
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 800px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    section {
+        padding: 80px 5%;
+    }
+
+    .period-selector {
+        margin-top: 150px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">🇹🇷 TÜRK MİLLETİ</div>
+
+<nav>
+<a href="#anasayfa">Ana Sayfa</a>
+<a href="#turkiye">Türkiye</a>
+<a href="#osmanli">Osmanlı</a>
+</nav>
+
+</header>
+
+<!-- DÖNEM SEÇİMİ -->
+
+<div class="period-selector">
+
+<h3>📚 Tarih Bölümü Seç</h3>
+
+<button class="period-button active" id="turkiyeBtn" onclick="showTurkiye()">
+🇹🇷 Türkiye Cumhuriyeti
+</button>
+
+<button class="period-button" id="osmanliBtn" onclick="showOsmanli()">
+☪️ Osmanlı Devleti
+</button>
+
+</div>
+
+<!-- ANA SAYFA -->
+
+<section class="hero" id="anasayfa">
+
+<h1>TÜRK MİLLETİ</h1>
+
+<p>
+Türk tarihi, Osmanlı Devleti, Millî Mücadele ve
+Türkiye Cumhuriyeti hakkında bilgilendirici site.
+</p>
+
+<a class="button" href="#turkiye">KEŞFET</a>
+
+</section>
+
+<!-- ========================= -->
+
+<!-- TÜRKİYE CUMHURİYETİ -->
+
+<!-- ========================= -->
+
+<div id="turkiye">
+
+<section id="turkiye-baslangic">
+
+<h2>🇹🇷 Türkiye Cumhuriyeti</h2>
+
+<div class="card">
+
+<h3>Türkiye Cumhuriyeti</h3>
+
+<p>
+Türkiye Cumhuriyeti, 29 Ekim 1923 tarihinde ilan edilmiştir.
+Mustafa Kemal Atatürk, Cumhuriyet'in ilanından sonra
+Türkiye Cumhuriyeti'nin ilk Cumhurbaşkanı olmuştur.
+</p>
+
+<br>
+
+<p>
+Bu bölümde Mustafa Kemal Atatürk, İstiklâl Marşı,
+İsmet İnönü ve Millî Mücadele hakkında bilgiler
+bulabilirsiniz.
+</p>
+
+</div>
+
+</section>
+
+<section id="ataturk">
+
+<h2>Mustafa Kemal Atatürk</h2>
+
+<div class="card">
+
+<h3>Mustafa Kemal Atatürk</h3>
+
+<p>
+Mustafa Kemal Atatürk, Türkiye Cumhuriyeti'nin kurucusu
+ve ilk Cumhurbaşkanıdır.
+</p>
+
+<br>
+
+<p>
+1881 yılında Selanik'te doğmuştur. Millî Mücadele'nin
+önderliğini yapmış ve 29 Ekim 1923 tarihinde Türkiye
+Cumhuriyeti'nin ilan edilmesinin ardından ilk Cumhurbaşkanı
+olmuştur.
+</p>
+
+<br>
+
+<p>
+Atatürk döneminde eğitim, hukuk ve toplumsal yaşamın
+çeşitli alanlarında reformlar gerçekleştirilmiştir.
+</p>
+
+</div>
+
+</section>
+
+<section id="istiklal">
+
+<h2>İstiklâl Marşı</h2>
+
+<div class="card">
+
+<h3>Mehmet Âkif Ersoy</h3>
+
+<p>
+İstiklâl Marşı, Mehmet Âkif Ersoy tarafından yazılmıştır.
+12 Mart 1921 tarihinde Türkiye Büyük Millet Meclisi
+tarafından millî marş olarak kabul edilmiştir.
+</p>
+
+<div class="audio-box">
+
+<h3>🎵 İstiklâl Marşı</h3>
+
+<audio controls preload="auto">
+    <source src="istiklal-marsi.mp3" type="audio/mpeg">
+    Tarayıcınız ses oynatmayı desteklemiyor.
+</audio>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="inonu">
+
+<h2>İsmet İnönü</h2>
+
+<div class="card">
+
+<h3>İsmet İnönü</h3>
+
+<p>
+İsmet İnönü, Millî Mücadele döneminde görev yapan asker
+ve siyasetçidir.
+</p>
+
+<br>
+
+<p>
+Lozan Barış Konferansı'nda Türkiye'yi temsil eden heyetin
+başkanlığını yapmıştır.
+</p>
+
+<br>
+
+<p>
+Türkiye Cumhuriyeti'nin ikinci Cumhurbaşkanı olarak
+görev yapmıştır.
+</p>
+
+</div>
+
+</section>
+
+<section id="kurtulus">
+
+<h2>Kurtuluş Savaşı</h2>
+
+<div class="timeline">
+
+<div class="event">
+<h3>1919 — Samsun</h3>
+<p>
+Mustafa Kemal Paşa 19 Mayıs 1919'da Samsun'a çıktı.
+</p>
+</div>
+
+<div class="event">
+<h3>1920 — TBMM</h3>
+<p>
+Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açıldı.
+</p>
+</div>
+
+<div class="event">
+<h3>1921 — İstiklâl Marşı</h3>
+<p>
+İstiklâl Marşı 12 Mart 1921'de kabul edildi.
+</p>
+</div>
+
+<div class="event">
+<h3>1922 — Büyük Taarruz</h3>
+<p>
+Büyük Taarruz Ağustos 1922'de gerçekleştirildi.
+</p>
+</div>
+
+<div class="event">
+<h3>1923 — Cumhuriyet</h3>
+<p>
+Türkiye Cumhuriyeti 29 Ekim 1923'te ilan edildi.
+</p>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- ========================= -->
+
+<!-- OSMANLI DEVLETİ -->
+
+<!-- ========================= -->
+
+<div id="osmanli" class="hidden">
+
+<div class="osmanli-banner">
+
+<h2>☪️ Osmanlı Devleti</h2>
+
+<p>
+Osmanlı Devleti, yaklaşık altı yüzyıl boyunca üç kıtaya
+yayılan büyük bir devlet olarak varlığını sürdürmüştür.
+</p>
+
+</div>
+
+<section>
+
+<h2>Fatih Sultan Mehmet</h2>
+
+<div class="card osmanli-card">
+
+<h3>Fatih Sultan Mehmet</h3>
+
+<p>
+Fatih Sultan Mehmet, Osmanlı Devleti'nin 7. padişahıdır.
+30 Mart 1432 tarihinde Edirne'de doğmuştur.
+</p>
+
+<br>
+
+<p>
+1453 yılında İstanbul'u fethederek Bizans İmparatorluğu'nun
+başkentine Osmanlı hâkimiyetini getirmiştir.
+</p>
+
+<br>
+
+<p>
+İstanbul'un fethinden sonra "Fatih" unvanıyla anılmıştır.
+Saltanatı boyunca Osmanlı Devleti'nin askerî, siyasi,
+hukuki ve kültürel alanlarda gelişmesine katkıda bulunmuştur.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Yavuz Sultan Selim</h2>
+
+<div class="card osmanli-card">
+
+<h3>Yavuz Sultan Selim</h3>
+
+<p>
+Yavuz Sultan Selim, Osmanlı Devleti'nin 9. padişahıdır.
+10 Ekim 1470 tarihinde Amasya'da doğmuştur.
+</p>
+
+<br>
+
+<p>
+1512 yılında Osmanlı tahtına çıkmıştır. Saltanatı sırasında
+Osmanlı Devleti'nin doğu ve güney yönündeki toprakları
+önemli ölçüde genişlemiştir.
+</p>
+
+<br>
+
+<p>
+1514 yılında Çaldıran Savaşı'nda Safevî Devleti'ne karşı
+zafer kazanmıştır. 1516-1517 yıllarında gerçekleştirilen
+Memlük seferleri sonucunda Osmanlı Devleti'nin bölgedeki
+hâkimiyeti genişlemiştir.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>🎵 Ceddin Deden</h2>
+
+<div class="card osmanli-card">
+
+<h3>Ceddin Deden</h3>
+
+<p>
+"Ceddin Deden", Osmanlı dönemini ve geçmiş nesilleri
+konu alan tanınmış Türk marşlarından biridir.
+</p>
+
+<br>
+
+<p>
+Aşağıdaki oynatıcı üzerinden elindeki ses dosyasını
+oynatabilirsin.
+</p>
+
+<div class="audio-box">
+
+<h3>🇹🇷 Ceddin Deden</h3>
+
+<audio controls preload="auto">
+    <source src="ceddin-deden.mp3" type="audio/mpeg">
+    Tarayıcınız ses oynatmayı desteklemiyor.
+</audio>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Osmanlı Tarihinden Önemli Olaylar</h2>
+
+<div class="timeline">
+
+<div class="event">
+<h3>1299 — Osmanlı Beyliği</h3>
+<p>
+Osmanlı Beyliği'nin kuruluşu geleneksel olarak bu tarihle
+ilişkilendirilir.
+</p>
+</div>
+
+<div class="event">
+<h3>1453 — İstanbul'un Fethi</h3>
+<p>
+Fatih Sultan Mehmet'in komutasındaki Osmanlı ordusu
+İstanbul'u fethetti.
+</p>
+</div>
+
+<div class="event">
+<h3>1514 — Çaldıran Savaşı</h3>
+<p>
+Yavuz Sultan Selim döneminde Osmanlı ve Safevî orduları
+Çaldıran'da karşılaştı.
+</p>
+</div>
+
+<div class="event">
+<h3>1517 — Mısır Seferi</h3>
+<p>
+Yavuz Sultan Selim dönemindeki seferler sonucunda
+Osmanlı Devleti'nin Mısır ve çevresindeki hâkimiyeti
+genişledi.
+</p>
+</div>
+
+<div class="event">
+<h3>1922 — Saltanatın Kaldırılması</h3>
+<p>
+Türkiye Büyük Millet Meclisi tarafından saltanat kaldırıldı.
+</p>
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<footer>
+
+<p>🇹🇷 TÜRK MİLLETİ</p>
+
+<br>
+
+<p>Türk tarihi ve Cumhuriyet bilgi sitesi</p>
+
+</footer>
+
+<script>
+
+function showTurkiye() {
+
+    document.getElementById("turkiye").classList.remove("hidden");
+    document.getElementById("osmanli").classList.add("hidden");
+
+    document.getElementById("turkiyeBtn").classList.add("active");
+    document.getElementById("osmanliBtn").classList.remove("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+function showOsmanli() {
+
+    document.getElementById("turkiye").classList.add("hidden");
+    document.getElementById("osmanli").classList.remove("hidden");
+
+    document.getElementById("turkiyeBtn").classList.remove("active");
+    document.getElementById("osmanliBtn").classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
