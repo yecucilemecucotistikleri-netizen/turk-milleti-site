@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>MÜZE 3D</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    font-family:Arial,sans-serif;
+    touch-action:none;
+}
+
+#game{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+    background:#000;
+}
+
+#ui{
+    position:fixed;
+    inset:0;
+    z-index:10;
+    pointer-events:none;
+}
+
+#topBar{
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+#info{
+    background:rgba(0,0,0,.65);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:10px;
+    padding:9px 12px;
+    color:#fff;
+    font-size:14px;
+    line-height:1.5;
+    backdrop-filter:blur(4px);
+}
+
+#buttons{
+    display:flex;
+    gap:7px;
+    pointer-events:auto;
+}
+
+.uiButton{
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(0,0,0,.7);
+    color:#fff;
+    border-radius:10px;
+    padding:9px 12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.uiButton:hover{
+    background:#b30000;
+}
+
+#crosshair{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:10px;
+    height:10px;
+    transform:translate(-50%,-50%);
+}
+
+#crosshair:before,
+#crosshair:after{
+    content:"";
+    position:absolute;
+    background:#fff;
+}
+
+#crosshair:before{
+    width:10px;
+    height:2px;
+    left:0;
+    top:4px;
+}
+
+#crosshair:after{
+    width:2px;
+    height:10px;
+    left:4px;
+    top:0;
+}
+
+#hint{
+    position:absolute;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,.78);
+    border:2px solid #d4af37;
+    color:#ffe98a;
+    padding:10px 15px;
+    border-radius:11px;
+    font-weight:bold;
+    white-space:nowrap;
+    display:none;
+}
+
+#toastBox{
+    position:absolute;
+    top:62px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    align-items:center;
+}
+
+.toast{
+    background:#ffd750;
+    color:#211900;
+    border-radius:9px;
+    padding:9px 14px;
+    font-weight:bold;
+}
+
+#miniMap{
+    position:absolute;
+    right:10px;
+    top:80px;
+    width:150px;
+    height:150px;
+    background:rgba(0,0,0,.7);
+    border:2px solid #d4af37;
+    border-radius:10px;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.76);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    pointer-events:auto;
+}
+
+.box{
+    width:min(850px,95vw);
+    max-height:82vh;
+    overflow:auto;
+    background:#0d0d14;
+    color:#fff;
+    border:3px solid #d4af37;
+    border-radius:18px;
+    padding:25px;
+}
+
+.box h2{
+    color:#ffd750;
+    margin-bottom:16px;
+}
+
+.box h3{
+    color:#ffd750;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.box p{
+    color:#eee;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.closeText{
+    margin-top:18px;
+    color:#999!important;
+    font-size:14px!important;
+}
+
+.achievement{
+    display:flex;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.achievementIcon{
+    width:42px;
+    font-size:28px;
+    text-align:center;
+}
+
+.achievement.locked{
+    opacity:.35;
+}
+
+.achievement strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.achievement span{
+    color:#aaa;
+    font-size:14px;
+}
+
+#startScreen{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:
+        radial-gradient(circle at center,#49391b 0%,#111 45%,#050505 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+#startBox{
+    width:min(680px,95vw);
+    text-align:center;
+    background:rgba(8,8,8,.88);
+    border:2px solid #d4af37;
+    border-radius:20px;
+    padding:35px 25px;
+}
+
+#startBox h1{
+    color:#ffd750;
+    font-size:clamp(38px,7vw,62px);
+    margin-bottom:16px;
+}
+
+#startBox p{
+    color:#ddd;
+    line-height:1.7;
+    margin-bottom:14px;
+}
+
+#startButton{
+    border:0;
+    background:#b30000;
+    color:#fff;
+    border-radius:12px;
+    padding:15px 28px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:8px;
+}
+
+#startButton:hover{
+    background:#e30613;
+}
+
+#mobileControls{
+    position:absolute;
+    inset:0;
+    display:none;
+    pointer-events:none;
+}
+
+#joystick{
+    position:absolute;
+    left:20px;
+    bottom:22px;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:rgba(255,255,255,.1);
+    border:2px solid rgba(255,255,255,.28);
+    pointer-events:auto;
+}
+
+#knob{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:64px;
+    height:64px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:rgba(255,255,255,.28);
+    border:2px solid rgba(255,255,255,.5);
+}
+
+#lookZone{
+    position:absolute;
+    top:0;
+    right:0;
+    width:55%;
+    height:100%;
+    pointer-events:auto;
+}
+
+#lookText{
+    position:absolute;
+    right:20px;
+    bottom:100px;
+    color:rgba(255,255,255,.4);
+    font-size:12px;
+}
+
+#mobileButtons{
+    position:absolute;
+    right:18px;
+    bottom:18px;
+    display:flex;
+    gap:10px;
+    pointer-events:auto;
+}
+
+.mobileButton{
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.4);
+    background:rgba(0,0,0,.62);
+    color:#fff;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.mobileButton:active{
+    background:#b30000;
+}
+
+@media(max-width:800px){
+
+    #mobileControls{
+        display:block;
+    }
+
+    #miniMap{
+        width:110px;
+        height:110px;
+        top:85px;
+        right:8px;
+    }
+
+    #info{
+        font-size:12px;
+        max-width:70vw;
+        padding:7px 9px;
+    }
+
+    .uiButton{
+        padding:8px 9px;
+        font-size:12px;
+    }
+
+    #hint{
+        bottom:170px;
+        font-size:13px;
+    }
+
+    .box{
+        padding:20px;
+    }
+
+    .box h3{
+        font-size:23px;
+    }
+
+    .box p{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="ui">
+
+    <div id="topBar">
+
+        <div id="info">
+            Puan:
+            <span id="score">0</span>
+            |
+            Başarım:
+            <span id="achievementCount">0</span>/7
+            <br>
+            Bölge:
+            <span id="zone">Giriş Holü</span>
+        </div>
+
+        <div id="buttons">
+
+            <button
+                class="uiButton"
+                id="achievementButton"
+            >
+                🏆
+            </button>
+
+            <button
+                class="uiButton"
+                id="fullscreenButton"
+            >
+                ⛶
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="crosshair"></div>
+
+    <div id="hint"></div>
+
+    <div id="toastBox"></div>
+
+    <canvas
+        id="miniMap"
+        width="300"
+        height="300"
+    ></canvas>
+
+    <div
+        id="infoPanel"
+        class="overlay"
+    >
+
+        <div class="box">
+
+            <h3 id="panelTitle"></h3>
+
+            <p id="panelText"></p>
+
+            <p class="closeText">
+                E veya SPACE ile kapat
+            </p>
+
+        </div>
+
+    </div>
+
+    <div
+        id="achievementPanel"
+        class="overlay"
+    >
+
+        <div class="box">
+
+            <h2>
+                🏆 BAŞARIMLAR
+            </h2>
+
+            <div id="achievementList"></div>
+
+            <p class="closeText">
+                TAB veya 🏆 ile kapat
+            </p>
+
+        </div>
+
+    </div>
+
+    <div id="mobileControls">
+
+        <div id="joystick">
+
+            <div id="knob"></div>
+
+        </div>
+
+        <div id="lookZone"></div>
+
+        <div id="lookText">
+            Sağ tarafta sürükle → kamera
+        </div>
+
+        <div id="mobileButtons">
+
+            <button
+                id="mobileE"
+                class="mobileButton"
+            >
+                E
+            </button>
+
+            <button
+                id="mobileAch"
+                class="mobileButton"
+            >
+                🏆
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="startScreen">
+
+    <div id="startBox">
+
+        <h1>
+            🏛️ MÜZE 3D
+        </h1>
+
+        <p>
+            Birinci şahıs bakış açısıyla müzeyi keşfet.
+            Salonlara gir, hologramlarla konuş ve sergileri incele.
+        </p>
+
+        <p>
+            <b>PC:</b> WASD + Mouse + E + TAB
+            <br>
+            <b>Telefon / Tablet:</b> Joystick + Kamera + E
+        </p>
+
+        <button id="startButton">
+            🎮 OYUNA BAŞLA
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   SALONLAR
+========================================================= */
+
+const SALONLAR = {
+
+    hol:{
+        ad:"Giriş Holü",
+        hologram:
+        "Müzeye hoş geldin! Dört farklı tarihi salonu keşfedebilirsin. Salonlardaki sergilere yaklaş ve E tuşuna bas."
+    },
+
+    ataturk:{
+        ad:"Mustafa Kemal Atatürk Salonu",
+
+        hologram:
+        "Mustafa Kemal Atatürk'ün hayatını ve Millî Mücadele dönemini anlatan salon. 19 Mayıs 1919, 23 Nisan 1920 ve 29 Ekim 1923 burada anlatılıyor.",
+
+        sergiler:[
+
+            [
+                "19 Mayıs 1919 - Samsun",
+                "Mustafa Kemal Paşa 19 Mayıs 1919'da Samsun'a çıktı. Bu tarih Millî Mücadele'nin önemli başlangıç noktalarından biridir."
+            ],
+
+            [
+                "23 Nisan 1920 - TBMM",
+                "23 Nisan 1920'de Ankara'da Türkiye Büyük Millet Meclisi açıldı."
+            ],
+
+            [
+                "Büyük Taarruz",
+                "Büyük Taarruz 26 Ağustos 1922'de başladı. 30 Ağustos'ta Başkomutanlık Meydan Muharebesi kazanıldı."
+            ],
+
+            [
+                "29 Ekim 1923 - Cumhuriyet",
+                "Türkiye Cumhuriyeti 29 Ekim 1923'te ilan edildi."
+            ]
+
+        ]
+    },
+
+    inonu:{
+        ad:"İsmet İnönü Salonu",
+
+        hologram:
+        "İsmet İnönü, Millî Mücadele, Lozan ve Cumhuriyet döneminin önemli isimlerinden biridir.",
+
+        sergiler:[
+
+            [
+                "I. ve II. İnönü Muharebeleri",
+                "İsmet Paşa'nın yönettiği I. ve II. İnönü muharebeleri Millî Mücadele'nin önemli savaşlarındandır."
+            ],
+
+            [
+                "Lozan Barış Konferansı",
+                "İsmet İnönü, Lozan Barış Konferansı'nda Türk heyetinin başkanlığını yaptı."
+            ],
+
+            [
+                "İkinci Cumhurbaşkanı",
+                "İsmet İnönü, 11 Kasım 1938'de Türkiye'nin ikinci Cumhurbaşkanı seçildi."
+            ],
+
+            [
+                "Savaş Yılları",
+                "II. Dünya Savaşı döneminde Türkiye'nin savaşa girmemesine yönelik denge politikası izlendi."
+            ]
+
+        ]
+    },
+
+    fatih:{
+        ad:"Fatih Sultan Mehmed Salonu",
+
+        hologram:
+        "Fatih Sultan Mehmed'in 1453 İstanbul fethi ve Osmanlı tarihindeki yeri bu salonda anlatılıyor.",
+
+        sergiler:[
+
+            [
+                "Rumeli Hisarı",
+                "Rumeli Hisarı 1452'de İstanbul kuşatması öncesinde inşa edildi."
+            ],
+
+            [
+                "Şahi Topları",
+                "Büyük kuşatma topları İstanbul'un fethi sırasında kullanıldı."
+            ],
+
+            [
+                "Gemilerin Karadan Yürütülmesi",
+                "Osmanlı gemileri 22 Nisan 1453'te karadan yürütülerek Haliç'e indirildi."
+            ],
+
+            [
+                "29 Mayıs 1453",
+                "Fatih Sultan Mehmed 29 Mayıs 1453'te İstanbul'u fethetti."
+            ]
+
+        ]
+    },
+
+    selim:{
+        ad:"Yavuz Sultan Selim Salonu",
+
+        hologram:
+        "Yavuz Sultan Selim döneminde Osmanlı'nın doğu ve güney yönündeki genişlemesi anlatılıyor.",
+
+        sergiler:[
+
+            [
+                "1512 - Tahta Çıkış",
+                "Yavuz Sultan Selim 1512'de Osmanlı tahtına çıktı."
+            ],
+
+            [
+                "Çaldıran Savaşı",
+                "1514'te Safevi Devleti'ne karşı Çaldıran Savaşı kazanıldı."
+            ],
+
+            [
+                "Mercidabık ve Ridaniye",
+                "1516 Mercidabık ve 1517 Ridaniye zaferleriyle Osmanlı'nın Suriye ve Mısır'daki hâkimiyeti genişledi."
+            ],
+
+            [
+                "Kutsal Emanetler",
+                "Mısır seferi sonrasında Mukaddes Emanetler İstanbul'a getirildi."
+            ]
+
+        ]
+    }
+
+};
+
+
+/* =========================================================
+   HARİTA
+========================================================= */
+
+const N=21;
+
+const grid=
+Array.from(
+    {length:N},
+    ()=>Array(N).fill(1)
+);
+
+function oyuk(x0,x1,y0,y1){
+
+    for(
+        let y=y0;
+        y<=y1;
+        y++
+    ){
+
+        for(
+            let x=x0;
+            x<=x1;
+            x++
+        ){
+
+            grid[y][x]=0;
+
+        }
+
+    }
+
+}
+
+oyuk(6,14,6,14);
+oyuk(7,13,1,4);
+oyuk(7,13,16,19);
+oyuk(1,4,7,13);
+oyuk(16,19,7,13);
+oyuk(9,11,5,5);
+oyuk(9,11,15,15);
+oyuk(5,5,9,11);
+oyuk(15,15,9,11);
+
+
+function bolge(x,y){
+
+    if(y<6) return "ataturk";
+    if(y>14) return "fatih";
+    if(x<6) return "inonu";
+    if(x>14) return "selim";
+
+    return "hol";
+
+}
+
+const RENK={
+
+    hol:[176,164,140],
+    ataturk:[190,40,48],
+    inonu:[55,95,165],
+    fatih:[125,65,145],
+    selim:[40,125,85]
+
+};
+
+const ISIM={
+
+    ataturk:"Mustafa Kemal Atatürk",
+    inonu:"İsmet İnönü",
+    fatih:"Fatih Sultan Mehmed",
+    selim:"Yavuz Sultan Selim"
+
+};
+
+const YERLER={
+
+    ataturk:{
+        merkez:[10.5,2.5],
+        koseler:[
+            [8.5,1.5],
+            [12.5,1.5],
+            [8.5,3.5],
+            [12.5,3.5]
+        ]
+    },
+
+    fatih:{
+        merkez:[10.5,17.5],
+        koseler:[
+            [8.5,16.5],
+            [12.5,16.5],
+            [8.5,18.5],
+            [12.5,18.5]
+        ]
+    },
+
+    inonu:{
+        merkez:[2.5,10.5],
+        koseler:[
+            [1.5,8.5],
+            [3.5,8.5],
+            [1.5,12.5],
+            [3.5,12.5]
+        ]
+    },
+
+    selim:{
+        merkez:[17.5,10.5],
+        koseler:[
+            [16.5,8.5],
+            [18.5,8.5],
+            [16.5,12.5],
+            [18.5,12.5]
+        ]
+    }
+
+};
+
+const objeler=[];
+
+for(const salon in YERLER){
+
+    const yer=YERLER[salon];
+
+    objeler.push({
+
+        salon:salon,
+        idx:-1,
+        x:yer.merkez[0],
+        y:yer.merkez[1],
+        ad:ISIM[salon]
+
+    });
+
+    yer.koseler.forEach(
+        (p,i)=>{
+
+            objeler.push({
+
+                salon:salon,
+                idx:i,
+                x:p[0],
+                y:p[1],
+                ad:SALONLAR[salon].sergiler[i][0]
+
+            });
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   BAŞARIMLAR
+========================================================= */
+
+const BASARIM={
+
+    ilk:[
+        "İlk Adım",
+        "Müzeye giriş yaptın.",
+        "🚶"
+    ],
+
+    gezgin:[
+        "Müze Gezgini",
+        "Dört salonu da gezdin.",
+        "🧭"
+    ],
+
+    ataturk:[
+        "Cumhuriyet Çocuğu",
+        "Atatürk Salonu'nu tamamen inceledin.",
+        "🇹🇷"
+    ],
+
+    inonu:[
+        "Lozan Diplomatı",
+        "İnönü Salonu'nu tamamen inceledin.",
+        "📜"
+    ],
+
+    fatih:[
+        "Çağ Açan",
+        "Fatih Salonu'nu tamamen inceledin.",
+        "🏰"
+    ],
+
+    selim:[
+        "Doğu'nun Fatihi",
+        "Selim Salonu'nu tamamen inceledin.",
+        "⚔️"
+    ],
+
+    mudur:[
+        "Müze Müdürü",
+        "Müzedeki her şeyi inceledin.",
+        "🏛️"
+    ]
+
+};
+
+const durum={
+
+    x:10.5,
+    y:10.5,
+
+    angle:-Math.PI/2,
+
+    score:0,
+
+    incelenen:new Set(),
+    gezilen:new Set(),
+    basarim:new Set(),
+
+    panel:false,
+    achievements:false,
+
+    toasts:[]
+
+};
+
+
+function toast(text){
+
+    durum.toasts.push({
+        text:text,
+        time:3
+    });
+
+}
+
+
+function unlock(key){
+
+    if(
+        durum.basarim.has(key)
+    ){
+
+        return;
+
+    }
+
+    durum.basarim.add(key);
+
+    durum.score+=25;
+
+    toast(
+        "★ BAŞARIM: "+
+        BASARIM[key][0]+
+        " (+25)"
+    );
+
+    updateUI();
+
+}
+
+
+function checkAchievements(){
+
+    unlock("ilk");
+
+    const region=
+        bolge(
+            Math.floor(durum.x),
+            Math.floor(durum.y)
+        );
+
+    if(region!=="hol"){
+
+        durum.gezilen.add(region);
+
+    }
+
+    if(
+        durum.gezilen.size===4
+    ){
+
+        unlock("gezgin");
+
+    }
+
+    for(
+        const salon in YERLER
+    ){
+
+        let complete=true;
+
+        for(
+            let i=-1;
+            i<=3;
+            i++
+        ){
+
+            if(
+                !durum.incelenen.has(
+                    salon+":"+i
+                )
+            ){
+
+                complete=false;
+
+            }
+
+        }
+
+        if(complete){
+
+            unlock(salon);
+
+        }
+
+    }
+
+    if(
+        durum.incelenen.size>=20
+    ){
+
+        unlock("mudur");
+
+    }
+
+}
+
+
+/* =========================================================
+   ÇARPIŞMA
+========================================================= */
+
+function wall(x,y){
+
+    if(
+        x<0||
+        y<0||
+        x>=N||
+        y>=N
+    ){
+
+        return true;
+
+    }
+
+    return grid[
+        Math.floor(y)
+    ][
+        Math.floor(x)
+    ]===1;
+
+}
+
+
+function blocked(x,y){
+
+    const r=.22;
+
+    return(
+        wall(x-r,y-r)||
+        wall(x+r,y-r)||
+        wall(x-r,y+r)||
+        wall(x+r,y+r)
+    );
+
+}
+
+
+/* =========================================================
+   AÇI
+========================================================= */
+
+function fixAngle(a){
+
+    while(a>Math.PI){
+
+        a-=Math.PI*2;
+
+    }
+
+    while(a<-Math.PI){
+
+        a+=Math.PI*2;
+
+    }
+
+    return a;
+
+}
+
+
+/* =========================================================
+   IŞIN
+========================================================= */
+
+function castRay(px,py,angle){
+
+    const dx=Math.cos(angle);
+    const dy=Math.sin(angle);
+
+    let mx=Math.floor(px);
+    let my=Math.floor(py);
+
+    const deltaX=
+        Math.abs(1/(dx||0.000001));
+
+    const deltaY=
+        Math.abs(1/(dy||0.000001));
+
+    let stepX;
+    let stepY;
+    let sideX;
+    let sideY;
+
+    if(dx<0){
+
+        stepX=-1;
+        sideX=(px-mx)*deltaX;
+
+    }else{
+
+        stepX=1;
+        sideX=(mx+1-px)*deltaX;
+
+    }
+
+    if(dy<0){
+
+        stepY=-1;
+        sideY=(py-my)*deltaY;
+
+    }else{
+
+        stepY=1;
+        sideY=(my+1-py)*deltaY;
+
+    }
+
+    let side=0;
+
+    for(let i=0;i<100;i++){
+
+        if(sideX<sideY){
+
+            sideX+=deltaX;
+            mx+=stepX;
+            side=0;
+
+        }else{
+
+            sideY+=deltaY;
+            my+=stepY;
+            side=1;
+
+        }
+
+        if(
+            wall(mx,my)
+        ){
+
+            const distance=
+                side===0
+                ? sideX-deltaX
+                : sideY-deltaY;
+
+            return{
+                distance:Math.max(
+                    distance,
+                    .01
+                ),
+                side:side
+            };
+
+        }
+
+    }
+
+    return{
+        distance:20,
+        side:0
+    };
+
+}
+
+
+/* =========================================================
+   YAKIN NESNE
+========================================================= */
+
+function nearestObject(){
+
+    let best=null;
+    let bestDist=1.7;
+
+    for(
+        const obj of objeler
+    ){
+
+        const dx=
+            obj.x-durum.x;
+
+        const dy=
+            obj.y-durum.y;
+
+        const dist=
+            Math.hypot(dx,dy);
+
+        const angle=
+            fixAngle(
+                Math.atan2(dy,dx)-
+                durum.angle
+            );
+
+        if(
+            dist<bestDist &&
+            Math.abs(angle)<.7
+        ){
+
+            best=obj;
+            bestDist=dist;
+
+        }
+
+    }
+
+    return best;
+
+}
+
+
+/* =========================================================
+   İNCELE
+========================================================= */
+
+function inspectObject(obj){
+
+    const key=
+        obj.salon+":"+obj.idx;
+
+    if(
+        !durum.incelenen.has(key)
+    ){
+
+        durum.incelenen.add(key);
+
+        durum.score+=5;
+
+        toast("+5 puan");
+
+    }
+
+    let title="";
+    let text="";
+
+    if(
+        obj.idx===-1
+    ){
+
+        title=
+            obj.ad+
+            " - Hologram";
+
+        text=
+            SALONLAR[
+                obj.salon
+            ].hologram;
+
+    }else{
+
+        title=
+            SALONLAR[
+                obj.salon
+            ].sergiler[
+                obj.idx
+            ][0];
+
+        text=
+            SALONLAR[
+                obj.salon
+            ].sergiler[
+                obj.idx
+            ][1];
+
+    }
+
+    document
+        .getElementById("panelTitle")
+        .textContent=
+        title;
+
+    document
+        .getElementById("panelText")
+        .textContent=
+        text;
+
+    document
+        .getElementById("infoPanel")
+        .style.display=
+        "flex";
+
+    durum.panel=true;
+
+    checkAchievements();
+    updateUI();
+
+}
+
+
+/* =========================================================
+   ETKİLEŞİM
+========================================================= */
+
+function interact(){
+
+    if(
+        durum.achievements
+    ){
+
+        return;
+
+    }
+
+    if(
+        durum.panel
+    ){
+
+        closePanel();
+
+        return;
+
+    }
+
+    const obj=
+        nearestObject();
+
+    if(obj){
+
+        inspectObject(obj);
+
+    }
+
+}
+
+
+function closePanel(){
+
+    durum.panel=false;
+
+    document
+        .getElementById("infoPanel")
+        .style.display=
+        "none";
+
+}
+
+
+/* =========================================================
+   BAŞARIM PANELİ
+========================================================= */
+
+function renderAchievements(){
+
+    const list=
+        document.getElementById(
+            "achievementList"
+        );
+
+    list.innerHTML="";
+
+    for(
+        const key in BASARIM
+    ){
+
+        const item=
+            BASARIM[key];
+
+        const unlocked=
+            durum.basarim.has(key);
+
+        const row=
+            document.createElement("div");
+
+        row.className=
+            "achievement "+
+            (
+                unlocked
+                ? ""
+                : "locked"
+            );
+
+        row.innerHTML=`
+
+            <div class="achievementIcon">
+                ${unlocked?item[2]:"🔒"}
+            </div>
+
+            <div>
+
+                <strong>
+                    ${unlocked?item[0]:"???"}
+                </strong>
+
+                <span>
+                    ${unlocked?item[1]:"Henüz açılmadı."}
+                </span>
+
+            </div>
+
+        `;
+
+        list.appendChild(row);
+
+    }
+
+}
+
+
+function toggleAchievements(){
+
+    durum.achievements=
+        !durum.achievements;
+
+    document
+        .getElementById(
+            "achievementPanel"
+        )
+        .style.display=
+        durum.achievements
+        ? "flex"
+        : "none";
+
+    if(
+        durum.achievements
+    ){
+
+        renderAchievements();
+
+    }
+
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+const canvas=
+    document.getElementById("game");
+
+const ctx=
+    canvas.getContext("2d");
+
+canvas.width=960;
+canvas.height=600;
+
+
+/* =========================================================
+   SAHNE
+========================================================= */
+
+function drawScene(){
+
+    const W=canvas.width;
+    const H=canvas.height;
+
+    const sky=
+        ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            H/2
+        );
+
+    sky.addColorStop(
+        0,
+        "#121526"
+    );
+
+    sky.addColorStop(
+        1,
+        "#303044"
+    );
+
+    ctx.fillStyle=sky;
+
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        H/2
+    );
+
+
+    const floor=
+        ctx.createLinearGradient(
+            0,
+            H/2,
+            0,
+            H
+        );
+
+    floor.addColorStop(
+        0,
+        "#4b4b50"
+    );
+
+    floor.addColorStop(
+        1,
+        "#151518"
+    );
+
+    ctx.fillStyle=floor;
+
+    ctx.fillRect(
+        0,
+        H/2,
+        W,
+        H/2
+    );
+
+
+    const rays=240;
+    const distances=
+        new Float32Array(rays);
+
+    const FOV=
+        Math.PI/3;
+
+    const columnWidth=
+        W/rays;
+
+
+    for(
+        let i=0;
+        i<rays;
+        i++
+    ){
+
+        const rayAngle=
+            durum.angle-
+            FOV/2+
+            FOV*i/rays;
+
+        const hit=
+            castRay(
+                durum.x,
+                durum.y,
+                rayAngle
+            );
+
+        const corrected=
+            Math.max(
+                .05,
+                hit.distance*
+                Math.cos(
+                    rayAngle-
+                    durum.angle
+                )
+            );
+
+        distances[i]=corrected;
+
+        const wallHeight=
+            Math.min(
+                H/corrected,
+                5000
+            );
+
+        const wx=
+            Math.floor(
+                durum.x+
+                Math.cos(rayAngle)*
+                corrected
+            );
+
+        const wy=
+            Math.floor(
+                durum.y+
+                Math.sin(rayAngle)*
+                corrected
+            );
+
+        const region=
+            bolge(
+                Math.max(
+                    0,
+                    Math.min(
+                        N-1,
+                        wx
+                    )
+                ),
+                Math.max(
+                    0,
+                    Math.min(
+                        N-1,
+                        wy
+                    )
+                )
+            );
+
+        const color=
+            RENK[region];
+
+        const light=
+            Math.max(
+                .22,
+                1-corrected/14
+            )*
+            (
+                hit.side
+                ? .72
+                : 1
+            );
+
+        ctx.fillStyle=
+            `rgb(
+                ${Math.floor(color[0]*light)},
+                ${Math.floor(color[1]*light)},
+                ${Math.floor(color[2]*light)}
+            )`;
+
+        ctx.fillRect(
+            i*columnWidth,
+            H/2-wallHeight/2,
+            columnWidth+1,
+            wallHeight
+        );
+
+    }
+
+
+    const sorted=
+        [...objeler].sort(
+            function(a,b){
+
+                const da=
+                    Math.hypot(
+                        a.x-durum.x,
+                        a.y-durum.y
+                    );
+
+                const db=
+                    Math.hypot(
+                        b.x-durum.x,
+                        b.y-durum.y
+                    );
+
+                return db-da;
+
+            }
+        );
+
+
+    for(
+        const obj of sorted
+    ){
+
+        const dx=
+            obj.x-durum.x;
+
+        const dy=
+            obj.y-durum.y;
+
+        const distance=
+            Math.hypot(
+                dx,
+                dy
+            );
+
+        const angle=
+            fixAngle(
+                Math.atan2(
+                    dy,
+                    dx
+                )-
+                durum.angle
+            );
+
+        if(
+            Math.abs(angle)>
+            FOV/2+.25
+        ){
+
+            continue;
+
+        }
+
+        const depth=
+            distance*
+            Math.cos(angle);
+
+        if(
+            depth<=.2
+        ){
+
+            continue;
+
+        }
+
+        const screenX=
+            (
+                angle/FOV+
+                .5
+            )*
+            W;
+
+        const ray=
+            Math.floor(
+                screenX/
+                columnWidth
+            );
+
+        if(
+            ray<0||
+            ray>=rays
+        ){
+
+            continue;
+
+        }
+
+        if(
+            distances[ray]<
+            depth
+        ){
+
+            continue;
+
+        }
+
+        const size=
+            Math.min(
+                H/depth*.55,
+                460
+            );
+
+        const baseY=
+            H/2+
+            H/(2*depth);
+
+        const key=
+            obj.salon+":"+obj.idx;
+
+        const viewed=
+            durum.incelenen.has(key);
+
+
+        if(
+            obj.idx===-1
+        ){
+
+            const bodyW=
+                size*.42;
+
+            const bodyH=
+                size*1.02;
+
+            const bodyX=
+                screenX-
+                bodyW/2;
+
+            const bodyY=
+                baseY-
+                bodyH;
+
+            const glow=
+                ctx.createLinearGradient(
+                    bodyX,
+                    bodyY,
+                    bodyX+bodyW,
+                    bodyY
+                );
+
+            glow.addColorStop(
+                0,
+                "rgba(50,220,255,.25)"
+            );
+
+            glow.addColorStop(
+                .5,
+                "rgba(225,255,255,.85)"
+            );
+
+            glow.addColorStop(
+                1,
+                "rgba(50,220,255,.25)"
+            );
+
+            ctx.fillStyle=glow;
+
+            ctx.fillRect(
+                bodyX,
+                bodyY,
+                bodyW,
+                bodyH
+            );
+
+            ctx.fillStyle="#e0fbff";
+
+            ctx.beginPath();
+
+            ctx.arc(
+                screenX,
+                bodyY-size*.15,
+                Math.max(
+                    5,
+                    size*.16
+                ),
+                0,
+                Math.PI*2
+            );
+
+            ctx.fill();
+
+            ctx.strokeStyle="#8ef8ff";
+            ctx.lineWidth=2;
+
+            ctx.strokeRect(
+                bodyX,
+                bodyY,
+                bodyW,
+                bodyH
+            );
+
+        }else{
+
+            const baseW=
+                size*.72;
+
+            const baseH=
+                size*.3;
+
+            const bx=
+                screenX-
+                baseW/2;
+
+            const by=
+                baseY-
+                baseH;
+
+            ctx.fillStyle="#654b32";
+
+            ctx.fillRect(
+                bx,
+                by,
+                baseW,
+                baseH
+            );
+
+            const signW=
+                size*.5;
+
+            const signH=
+                size*.28;
+
+            const sx=
+                screenX-
+                signW/2;
+
+            const sy=
+                by-
+                signH;
+
+            ctx.fillStyle=
+                viewed
+                ? "#45d57c"
+                : "#f0d65c";
+
+            ctx.fillRect(
+                sx,
+                sy,
+                signW,
+                signH
+            );
+
+            ctx.strokeStyle="#fff";
+            ctx.lineWidth=2;
+
+            ctx.strokeRect(
+                sx,
+                sy,
+                signW,
+                signH
+            );
+
+        }
+
+
+        if(
+            depth<5
+        ){
+
+            ctx.font=
+                "bold 15px Arial";
+
+            const label=
+                obj.ad;
+
+            const textWidth=
+                ctx.measureText(
+                    label
+                ).width;
+
+            const labelY=
+                Math.max(
+                    20,
+                    H/2-size*.72
+                );
+
+            ctx.fillStyle=
+                "rgba(0,0,0,.8)";
+
+            ctx.fillRect(
+                screenX-
+                textWidth/2-
+                7,
+                labelY-
+                18,
+                textWidth+14,
+                25
+            );
+
+            ctx.fillStyle="#fff";
+
+            ctx.fillText(
+                label,
+                screenX-
+                textWidth/2,
+                labelY
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   MİNİMAP
+========================================================= */
+
+function drawMiniMap(){
+
+    const map=
+        document.getElementById(
+            "miniMap"
+        );
+
+    const m=
+        map.getContext("2d");
+
+    const size=map.width;
+    const scale=size/N;
+
+    m.clearRect(
+        0,
+        0,
+        size,
+        size
+    );
+
+    m.fillStyle="#080808";
+
+    m.fillRect(
+        0,
+        0,
+        size,
+        size
+    );
+
+    for(
+        let y=0;
+        y<N;
+        y++
+    ){
+
+        for(
+            let x=0;
+            x<N;
+            x++
+        ){
+
+            if(
+                grid[y][x]
+            ){
+
+                m.fillStyle="#282828";
+
+            }else{
+
+                const c=
+                    RENK[
+                        bolge(x,y)
+                    ];
+
+                m.fillStyle=
+                    `rgb(
+                        ${Math.floor(c[0]*.45)},
+                        ${Math.floor(c[1]*.45)},
+                        ${Math.floor(c[2]*.45)}
+                    )`;
+
+            }
+
+            m.fillRect(
+                x*scale,
+                y*scale,
+                Math.ceil(scale),
+                Math.ceil(scale)
+            );
+
+        }
+
+    }
+
+
+    for(
+        const obj of objeler
+    ){
+
+        m.fillStyle=
+            obj.idx===-1
+            ? "#8ef8ff"
+            : "#ffe45d";
+
+        m.beginPath();
+
+        m.arc(
+            obj.x*scale,
+            obj.y*scale,
+            obj.idx===-1?3:2,
+            0,
+            Math.PI*2
+        );
+
+        m.fill();
+
+    }
+
+
+    const px=
+        durum.x*scale;
+
+    const py=
+        durum.y*scale;
+
+    m.fillStyle="#fff";
+
+    m.beginPath();
+
+    m.arc(
+        px,
+        py,
+        4,
+        0,
+        Math.PI*2
+    );
+
+    m.fill();
+
+    m.strokeStyle="#fff";
+
+    m.beginPath();
+
+    m.moveTo(
+        px,
+        py
+    );
+
+    m.lineTo(
+        px+
+        Math.cos(durum.angle)*11,
+        py+
+        Math.sin(durum.angle)*11
+    );
+
+    m.stroke();
+
+}
+
+
+/* =========================================================
+   UI
+========================================================= */
+
+function updateUI(){
+
+    document
+        .getElementById("score")
+        .textContent=
+        durum.score;
+
+    document
+        .getElementById("achievementCount")
+        .textContent=
+        durum.basarim.size;
+
+    const region=
+        bolge(
+            Math.floor(durum.x),
+            Math.floor(durum.y)
+        );
+
+    document
+        .getElementById("zone")
+        .textContent=
+        SALONLAR[region].ad;
+
+    const obj=
+        nearestObject();
+
+    const hint=
+        document.getElementById(
+            "hint"
+        );
+
+    if(
+        obj &&
+        !durum.panel &&
+        !durum.achievements
+    ){
+
+        hint.style.display=
+            "block";
+
+        hint.textContent=
+            obj.idx===-1
+            ? "E — Hologramla konuş"
+            : "E — Sergiyi incele";
+
+    }else{
+
+        hint.style.display=
+            "none";
+
+    }
+
+}
+
+
+function updateToasts(dt){
+
+    durum.toasts.forEach(
+        t=>{
+            t.time-=dt;
+        }
+    );
+
+    durum.toasts=
+        durum.toasts.filter(
+            t=>t.time>0
+        );
+
+    const box=
+        document.getElementById(
+            "toastBox"
+        );
+
+    box.innerHTML="";
+
+    durum.toasts
+        .slice(0,4)
+        .forEach(
+            t=>{
+
+                const div=
+                    document.createElement(
+                        "div"
+                    );
+
+                div.className=
+                    "toast";
+
+                div.textContent=
+                    t.text;
+
+                box.appendChild(
+                    div
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   KLAVYE
+========================================================= */
+
+const keys={};
+
+window.addEventListener(
+    "keydown",
+    function(e){
+
+        keys[
+            e.key.toLowerCase()
+        ]=true;
+
+        if(
+            e.key==="Tab"
+        ){
+
+            e.preventDefault();
+
+            toggleAchievements();
+
+        }
+
+        if(
+            e.key.toLowerCase()==="e"
+        ){
+
+            interact();
+
+        }
+
+        if(
+            e.key===" "
+        ){
+
+            if(
+                durum.panel
+            ){
+
+                closePanel();
+
+            }
+
+        }
+
+    }
+);
+
+window.addEventListener(
+    "keyup",
+    function(e){
+
+        keys[
+            e.key.toLowerCase()
+        ]=false;
+
+    }
+);
+
+
+/* =========================================================
+   PC MOUSE
+========================================================= */
+
+let pointerLocked=false;
+
+canvas.addEventListener(
+    "click",
+    function(){
+
+        if(
+            window.innerWidth<=800
+        ){
+
+            return;
+
+        }
+
+        if(
+            started &&
+            !durum.panel &&
+            !durum.achievements
+        ){
+
+            try{
+
+                canvas.requestPointerLock();
+
+            }catch(err){}
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "pointerlockchange",
+    function(){
+
+        pointerLocked=
+            document.pointerLockElement===
+            canvas;
+
+    }
+);
+
+document.addEventListener(
+    "mousemove",
+    function(e){
+
+        if(
+            pointerLocked &&
+            !durum.panel &&
+            !durum.achievements
+        ){
+
+            durum.angle+=
+                e.movementX*.0035;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MOBİL JOYSTICK
+========================================================= */
+
+const joystick=
+    document.getElementById(
+        "joystick"
+    );
+
+const knob=
+    document.getElementById(
+        "knob"
+    );
+
+let joystickActive=false;
+let joystickId=null;
+
+let joyX=0;
+let joyY=0;
+
+function moveJoystick(touch){
+
+    const rect=
+        joystick.getBoundingClientRect();
+
+    const cx=
+        rect.left+
+        rect.width/2;
+
+    const cy=
+        rect.top+
+        rect.height/2;
+
+    let dx=
+        touch.clientX-cx;
+
+    let dy=
+        touch.clientY-cy;
+
+    const max=
+        rect.width*.31;
+
+    const dist=
+        Math.hypot(
+            dx,
+            dy
+        );
+
+    if(
+        dist>max
+    ){
+
+        dx=
+            dx/dist*max;
+
+        dy=
+            dy/dist*max;
+
+    }
+
+    joyX=
+        dx/max;
+
+    joyY=
+        dy/max;
+
+    knob.style.transform=
+        `translate(
+            calc(-50% + ${dx}px),
+            calc(-50% + ${dy}px)
+        )`;
+
+}
+
+function resetJoystick(){
+
+    joystickActive=false;
+    joystickId=null;
+
+    joyX=0;
+    joyY=0;
+
+    knob.style.transform=
+        "translate(-50%,-50%)";
+
+}
+
+joystick.addEventListener(
+    "touchstart",
+    function(e){
+
+        e.preventDefault();
+
+        const touch=
+            e.changedTouches[0];
+
+        joystickActive=true;
+        joystickId=
+            touch.identifier;
+
+        moveJoystick(touch);
+
+    },
+    {passive:false}
+);
+
+joystick.addEventListener(
+    "touchmove",
+    function(e){
+
+        e.preventDefault();
+
+        for(
+            const touch of e.changedTouches
+        ){
+
+            if(
+                touch.identifier===
+                joystickId
+            ){
+
+                moveJoystick(touch);
+
+            }
+
+        }
+
+    },
+    {passive:false}
+);
+
+joystick.addEventListener(
+    "touchend",
+    function(e){
+
+        e.preventDefault();
+
+        resetJoystick();
+
+    },
+    {passive:false}
+);
+
+joystick.addEventListener(
+    "touchcancel",
+    resetJoystick
+);
+
+
+/* =========================================================
+   MOBİL KAMERA
+========================================================= */
+
+const lookZone=
+    document.getElementById(
+        "lookZone"
+    );
+
+let lookActive=false;
+let lookId=null;
+let lastLookX=0;
+
+lookZone.addEventListener(
+    "touchstart",
+    function(e){
+
+        e.preventDefault();
+
+        const touch=
+            e.changedTouches[0];
+
+        lookActive=true;
+        lookId=
+            touch.identifier;
+
+        lastLookX=
+            touch.clientX;
+
+    },
+    {passive:false}
+);
+
+lookZone.addEventListener(
+    "touchmove",
+    function(e){
+
+        e.preventDefault();
+
+        for(
+            const touch of e.changedTouches
+        ){
+
+            if(
+                touch.identifier===
+                lookId
+            ){
+
+                const dx=
+                    touch.clientX-
+                    lastLookX;
+
+                durum.angle+=
+                    dx*.008;
+
+                lastLookX=
+                    touch.clientX;
+
+            }
+
+        }
+
+    },
+    {passive:false}
+);
+
+lookZone.addEventListener(
+    "touchend",
+    function(){
+
+        lookActive=false;
+        lookId=null;
+
+    }
+);
+
+lookZone.addEventListener(
+    "touchcancel",
+    function(){
+
+        lookActive=false;
+        lookId=null;
+
+    }
+);
+
+
+/* =========================================================
+   HAREKET
+========================================================= */
+
+function updateMovement(dt){
+
+    if(
+        !started ||
+        durum.panel ||
+        durum.achievements
+    ){
+
+        return;
+
+    }
+
+    let forward=0;
+    let strafe=0;
+
+    if(
+        keys["w"]||
+        keys["arrowup"]
+    ){
+
+        forward+=1;
+
+    }
+
+    if(
+        keys["s"]||
+        keys["arrowdown"]
+    ){
+
+        forward-=1;
+
+    }
+
+    if(
+        keys["a"]
+    ){
+
+        strafe-=1;
+
+    }
+
+    if(
+        keys["d"]
+    ){
+
+        strafe+=1;
+
+    }
+
+    if(
+        keys["arrowleft"]
+    ){
+
+        durum.angle-=2*dt;
+
+    }
+
+    if(
+        keys["arrowright"]
+    ){
+
+        durum.angle+=2*dt;
+
+    }
+
+    if(
+        joystickActive
+    ){
+
+        forward+=
+            -joyY;
+
+        strafe+=
+            joyX;
+
+    }
+
+    const len=
+        Math.hypot(
+            forward,
+            strafe
+        );
+
+    if(
+        len>1
+    ){
+
+        forward/=len;
+        strafe/=len;
+
+    }
+
+    const speed=
+        3*dt;
+
+    const vx=
+        (
+            Math.cos(durum.angle)*
+            forward+
+            Math.cos(
+                durum.angle+
+                Math.PI/2
+            )*
+            strafe
+        )*
+        speed;
+
+    const vy=
+        (
+            Math.sin(durum.angle)*
+            forward+
+            Math.sin(
+                durum.angle+
+                Math.PI/2
+            )*
+            strafe
+        )*
+        speed;
+
+    if(
+        !blocked(
+            durum.x+vx,
+            durum.y
+        )
+    ){
+
+        durum.x+=vx;
+
+    }
+
+    if(
+        !blocked(
+            durum.x,
+            durum.y+vy
+        )
+    ){
+
+        durum.y+=vy;
+
+    }
+
+    checkAchievements();
+
+}
+
+
+/* =========================================================
+   MOBİL BUTONLAR
+========================================================= */
+
+document
+    .getElementById(
+        "mobileE"
+    )
+    .addEventListener(
+        "click",
+        interact
+    );
+
+document
+    .getElementById(
+        "mobileAch"
+    )
+    .addEventListener(
+        "click",
+        toggleAchievements
+    );
+
+document
+    .getElementById(
+        "achievementButton"
+    )
+    .addEventListener(
+        "click",
+        toggleAchievements
+    );
+
+
+/* =========================================================
+   TAM EKRAN
+========================================================= */
+
+document
+    .getElementById(
+        "fullscreenButton"
+    )
+    .addEventListener(
+        "click",
+        async function(){
+
+            try{
+
+                if(
+                    !document.fullscreenElement
+                ){
+
+                    await document
+                        .documentElement
+                        .requestFullscreen();
+
+                }else{
+
+                    await document
+                        .exitFullscreen();
+
+                }
+
+            }catch(error){
+
+                console.log(error);
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   BAŞLANGIÇ
+========================================================= */
+
+let started=false;
+
+document
+    .getElementById(
+        "startButton"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            started=true;
+
+            document
+                .getElementById(
+                    "startScreen"
+                )
+                .style.display=
+                "none";
+
+            toast(
+                "Müzeye hoş geldin! Sergilere yaklaş ve E'ye bas."
+            );
+
+            checkAchievements();
+
+            if(
+                window.innerWidth>800
+            ){
+
+                try{
+
+                    canvas.requestPointerLock();
+
+                }catch(error){}
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+window.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key==="Escape"
+        ){
+
+            if(
+                durum.panel
+            ){
+
+                closePanel();
+                return;
+
+            }
+
+            if(
+                durum.achievements
+            ){
+
+                toggleAchievements();
+                return;
+
+            }
+
+            if(
+                document.fullscreenElement
+            ){
+
+                document.exitFullscreen();
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   OYUN DÖNGÜSÜ
+========================================================= */
+
+let lastTime=
+    performance.now();
+
+function gameLoop(now){
+
+    const dt=
+        Math.min(
+            .05,
+            (now-lastTime)/1000
+        );
+
+    lastTime=now;
+
+    updateMovement(dt);
+
+    drawScene();
+
+    drawMiniMap();
+
+    updateToasts(dt);
+
+    updateUI();
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+checkAchievements();
+renderAchievements();
+requestAnimationFrame(
+    gameLoop
+);
+
+</script>
+
+</body>
+</html>
