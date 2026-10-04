@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Mustafa Kemal Atatürk 3D Bilgi Oyunu</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #080a0e;
+    font-family: Arial, Helvetica, sans-serif;
+    touch-action: none;
+}
+
+#game {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #080a0e;
+}
+
+/* HUD */
+
+#hud {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, calc(100% - 30px));
+    min-height: 150px;
+    padding: 18px;
+    background: rgba(15, 20, 28, 0.92);
+    border: 3px solid #009cff;
+    border-radius: 14px;
+    color: white;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 0 25px rgba(0, 156, 255, 0.25);
+}
+
+#question {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+#checkpoint {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    color: #00e878;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.answer {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.answer.a {
+    color: #64dcff;
+}
+
+.answer.b {
+    color: #ffc864;
+}
+
+/* Crosshair */
+
+#crosshair {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    pointer-events: none;
+}
+
+#crosshair::before,
+#crosshair::after {
+    content: "";
+    position: absolute;
+    background: white;
+}
+
+#crosshair::before {
+    width: 12px;
+    height: 2px;
+    top: 5px;
+    left: 0;
+}
+
+#crosshair::after {
+    width: 2px;
+    height: 12px;
+    left: 5px;
+    top: 0;
+}
+
+/* Mobil joystick */
+
+#joystickArea {
+    position: fixed;
+    left: 25px;
+    bottom: 30px;
+    width: 145px;
+    height: 145px;
+    z-index: 20;
+    display: none;
+}
+
+#joystickBase {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.13);
+    border: 3px solid rgba(255,255,255,0.35);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.35);
+}
+
+#joystickStick {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    left: 40px;
+    top: 40px;
+    border-radius: 50%;
+    background: rgba(0, 156, 255, 0.7);
+    border: 3px solid rgba(255,255,255,0.7);
+    box-shadow: 0 0 15px rgba(0,156,255,0.5);
+}
+
+/* Mobil kamera alanı */
+
+#lookArea {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 55%;
+    height: 100%;
+    z-index: 15;
+    touch-action: none;
+}
+
+/* Mobil kapı ipucu */
+
+#mobileHint {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    z-index: 18;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* Kazanma ekranı */
+
+#winScreen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+#winBox {
+    max-width: 700px;
+    padding: 40px;
+    background: #111820;
+    border: 3px solid #00e878;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,232,120,0.3);
+}
+
+#winBox h1 {
+    color: #00e878;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#winBox p {
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+#restart {
+    margin-top: 25px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    background: #009cff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* PC */
+
+@media (min-width: 769px) {
+    #lookArea {
+        display: none;
+    }
+}
+
+/* Telefon */
+
+@media (max-width: 768px) {
+
+    #hud {
+        top: 8px;
+        width: calc(100% - 16px);
+        min-height: 125px;
+        padding: 12px;
+    }
+
+    #question {
+        font-size: 15px;
+        padding-right: 5px;
+        margin-bottom: 9px;
+    }
+
+    #checkpoint {
+        position: static;
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .answer {
+        font-size: 13px;
+    }
+
+    #joystickArea {
+        display: block;
+    }
+
+    #mobileHint {
+        display: block;
+    }
+
+    #winBox h1 {
+        font-size: 27px;
+    }
+
+    #winBox p {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="hud">
+    <div id="checkpoint">Son Checkpoint: Soru 1</div>
+
+    <div id="question">
+        Soru 1/50
+    </div>
+
+    <div class="answers">
+        <div class="answer a" id="answerA"></div>
+        <div class="answer b" id="answerB"></div>
+    </div>
+</div>
+
+<div id="crosshair"></div>
+
+<div id="lookArea"></div>
+
+<div id="joystickArea">
+    <div id="joystickBase"></div>
+    <div id="joystickStick"></div>
+</div>
+
+<div id="mobileHint">
+    Sol joystick: yürü • Sağ tarafı sürükle: dön
+</div>
+
+<div id="winScreen">
+    <div id="winBox">
+        <h1>🎉 TEBRİKLER!</h1>
+        <p>
+            Tüm 50 soruyu başarıyla tamamladın!
+            <br><br>
+            Mustafa Kemal Atatürk bilgi oyununu bitirdin.
+        </p>
+
+        <button id="restart">
+            Yeniden Başla
+        </button>
+    </div>
+</div>
+
+<script>
+
+/* =========================================================
+   SORULAR
+========================================================= */
+
+const QUESTIONS = [
+    {q:"Atatürk hangi yıl doğmuştur?",a:"1881",b:"1889",correct:"A"},
+    {q:"Atatürk nerede doğmuştur?",a:"Manastır",b:"Selanik",correct:"B"},
+    {q:"Mustafa Kemal'in babasının adı nedir?",a:"Mehmet Efendi",b:"Ali Rıza Efendi",correct:"B"},
+    {q:"Mustafa Kemal'in annesinin adı nedir?",a:"Zübeyde Hanım",b:"Makbule Hanım",correct:"A"},
+    {q:"Mustafa Kemal'in kız kardeşinin adı nedir?",a:"Fatma Hanım",b:"Makbule Atadan",correct:"B"},
+    {q:"Atatürk'ün mezarı Anıtkabir hangi şehirdedir?",a:"Ankara",b:"İstanbul",correct:"A"},
+    {q:"Atatürk hangi yıl vefat etmiştir?",a:"1940",b:"1938",correct:"B"},
+    {q:"Atatürk nerede vefat etmiştir?",a:"Dolmabahçe Sarayı",b:"Çankaya Köşkü",correct:"A"},
+    {q:"Mustafa Kemal'e 'Kemal' adını hangi dersin öğretmeni vermiştir?",a:"Tarih",b:"Matematik",correct:"B"},
+    {q:"Mustafa Kemal'e 'Kemal' adını veren öğretmeninin adı nedir?",a:"Yüzbaşı Mustafa Efendi",b:"Ali Rıza Efendi",correct:"A"},
+
+    {q:"Samsun'a çıktığı tarih nedir?",a:"23 Nisan 1920",b:"19 Mayıs 1919",correct:"B"},
+    {q:"Samsun'a giderken bindiği ünlü geminin adı nedir?",a:"Bandırma Vapuru",b:"Gülcemal Vapuru",correct:"A"},
+    {q:"TBMM hangi tarihte açılmıştır?",a:"29 Ekim 1923",b:"23 Nisan 1920",correct:"B"},
+    {q:"Türkiye Cumhuriyeti hangi tarihte ilan edilmiştir?",a:"30 Ağustos 1922",b:"29 Ekim 1923",correct:"B"},
+    {q:"Cumhuriyetin ilanından sonra ilk Cumhurbaşkanı kim olmuştur?",a:"İsmet İnönü",b:"Mustafa Kemal Atatürk",correct:"B"},
+    {q:"'Geldikleri gibi giderler!' sözü nerede söylenmiştir?",a:"İstanbul Boğazı",b:"Çanakkale",correct:"A"},
+    {q:"'Size ben taarruzu değil, ölmeyi emrediyorum!' sözü hangi cephededir?",a:"Kafkas Cephesi",b:"Çanakkale Cephesi",correct:"B"},
+    {q:"Gazi unvanı ve Mareşal rütbesi hangi savaştan sonra verilmiştir?",a:"Sakarya Meydan Muharebesi",b:"I. İnönü Savaşı",correct:"A"},
+    {q:"Büyük Taarruz hangi ayda zaferle sonuçlanmıştır?",a:"Eylül",b:"Ağustos",correct:"B"},
+    {q:"30 Ağustos hangi bayram olarak kutlanır?",a:"Zafer Bayramı",b:"Gençlik ve Spor Bayramı",correct:"A"},
+
+    {q:"19 Mayıs hangi bayram olarak kutlanır?",a:"Ulusal Egemenlik Bayramı",b:"Atatürk'ü Anma, Gençlik ve Spor Bayramı",correct:"B"},
+    {q:"23 Nisan bayramının adı nedir?",a:"Ulusal Egemenlik ve Çocuk Bayramı",b:"Cumhuriyet Bayramı",correct:"A"},
+    {q:"Atatürk'ün gençliğe hitaben yazdığı ünlü eseri hangisidir?",a:"Medeni Bilgiler",b:"Nutuk",correct:"B"},
+    {q:"Atatürk'ün geometri terimlerini Türkçeleştirdiği kitabın adı nedir?",a:"Geometri",b:"Matematik Esasları",correct:"A"},
+    {q:"Türkiye'nin ilk kadın savaş pilotu olan manevi kızı kimdir?",a:"Afet İnan",b:"Sabiha Gökçen",correct:"B"},
+    {q:"'Hayatta en hakiki mürşit...' sözünün devamı nedir?",a:"ilimdir",b:"kuvvettir",correct:"A"},
+    {q:"'Yurtta sulh, ...' sözünün devamı nedir?",a:"milletle sulh",b:"cihanda sulh",correct:"B"},
+    {q:"Harf İnkılabı hangi yılda kabul edilmiştir?",a:"1928",b:"1935",correct:"A"},
+    {q:"Selanik'teki Atatürk Evi günümüzde hangi ülkededir?",a:"Bulgaristan",b:"Yunanistan",correct:"B"},
+    {q:"Türk Dil Kurumu hangi liderin talimatıyla kurulmuştur?",a:"Mustafa Kemal Atatürk",b:"Fevzi Çakmak",correct:"A"},
+
+    {q:"Atatürk'ün ilk okuduğu geleneksel okul hangisidir?",a:"Şemsi Efendi Mektebi",b:"Mahalle Mektebi",correct:"B"},
+    {q:"Ortaokul eğitimi için gittiği askeri okul hangisidir?",a:"Selanik Askeri Rüştiyesi",b:"Manastır Askeri İdadisi",correct:"A"},
+    {q:"Lise eğitimini aldığı okul hangisidir?",a:"Harp Akademisi",b:"Manastır Askeri İdadisi",correct:"B"},
+    {q:"Harp Okulu eğitimini hangi şehirde tamamlamıştır?",a:"İstanbul",b:"Ankara",correct:"A"},
+    {q:"1911'de İtalyanlara karşı savaştığı cephe neresidir?",a:"Suriye",b:"Trablusgarp",correct:"B"},
+    {q:"Milli Mücadele döneminde katıldığı ilk kongre hangisidir?",a:"Erzurum Kongresi",b:"Sivas Kongresi",correct:"A"},
+    {q:"Çanakkale'de düşman ilerleyişini durdurduğu ünlü tepe hangisidir?",a:"Kocatepe",b:"Conkbayırı",correct:"B"},
+    {q:"Amasya Genelgesi hangi yılda yayınlanmıştır?",a:"1919",b:"1920",correct:"A"},
+    {q:"'Milletin bağımsızlığını yine milletin azmi kurtaracaktır' kararı nerededir?",a:"Sivas Kongresi",b:"Amasya Genelgesi",correct:"B"},
+    {q:"'Manda ve himaye kabul olunamaz' kararı nerede kesin reddedilmiştir?",a:"Erzurum Kongresi",b:"Sivas Kongresi",correct:"A"},
+
+    {q:"Şapka Kanunu ilk olarak hangi ilimizde tanıtılmıştır?",a:"İzmir",b:"Kastamonu",correct:"B"},
+    {q:"Cumhuriyet ilan edildikten sonra ilk Başbakan kim olmuştur?",a:"İsmet İnönü",b:"Ali Fethi Okyar",correct:"A"},
+    {q:"Cumhuriyet ilan edildikten sonra TBMM'nin ilk başkanı kim olmuştur?",a:"Kazım Karabekir",b:"Ali Fethi Okyar",correct:"B"},
+    {q:"Atatürk'ün 'En büyük eserim' dediği yapı hangisidir?",a:"Türkiye Cumhuriyeti",b:"TBMM",correct:"A"},
+    {q:"Atatürk'ün doğum günü olarak kabul ettiği sembolik tarih nedir?",a:"23 Nisan",b:"19 Mayıs",correct:"B"},
+    {q:"Soyadı Kanunu hangi yılda kabul edilmiştir?",a:"1934",b:"1930",correct:"A"},
+    {q:"Kadınlara genel seçimlerde seçme/seçilme hakkı hangi yılda verilmiştir?",a:"1923",b:"1934",correct:"B"},
+    {q:"Naaşı Anıtkabir'e taşınmadan önce nerede muhafaza edilmiştir?",a:"Ankara Etnografya Müzesi",b:"TBMM Bahçesi",correct:"A"},
+    {q:"Etnografya Müzesi'nden Anıtkabir'e nakil hangi yılda yapılmıştır?",a:"1948",b:"1953",correct:"B"},
+    {q:"'Benim naçiz vücudum...' sözü hangi olay üzerine söylenmiştir?",a:"İzmir Suikastı Girişimi",b:"Menemen Olayı",correct:"A"}
+];
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let W = window.innerWidth;
+let H = window.innerHeight;
+
+function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resize);
+resize();
+
+
+/* =========================================================
+   OYUNCU
+========================================================= */
+
+let player = {
+    x: 0,
+    z: 6,
+    yaw: 0,
+    pitch: 0,
+    speed: 5
+};
+
+let currentQuestion = 0;
+let checkpoint = 0;
+let completed = false;
+
+
+/* =========================================================
+   JOYSTICK
+========================================================= */
+
+let joystick = {
+    active: false,
+    x: 0,
+    y: 0
+};
+
+const joystickArea = document.getElementById("joystickArea");
+const joystickStick = document.getElementById("joystickStick");
+
+joystickArea.addEventListener("pointerdown", function(e) {
+
+    joystick.active = true;
+
+    joystickArea.setPointerCapture(e.pointerId);
+
+    updateJoystick(e);
+
+});
+
+joystickArea.addEventListener("pointermove", function(e) {
+
+    if (!joystick.active) return;
+
+    updateJoystick(e);
+
+});
+
+joystickArea.addEventListener("pointerup", resetJoystick);
+joystickArea.addEventListener("pointercancel", resetJoystick);
+
+function updateJoystick(e) {
+
+    const rect = joystickArea.getBoundingClientRect();
+
+    let x = e.clientX - (rect.left + rect.width / 2);
+    let y = e.clientY - (rect.top + rect.height / 2);
+
+    const max = 50;
+
+    const length = Math.sqrt(x*x + y*y);
+
+    if (length > max) {
+
+        x = x / length * max;
+        y = y / length * max;
+
+    }
+
+    joystick.x = x / max;
+    joystick.y = y / max;
+
+    joystickStick.style.transform =
+        `translate(${x}px, ${y}px)`;
+}
+
+function resetJoystick() {
+
+    joystick.active = false;
+
+    joystick.x = 0;
+    joystick.y = 0;
+
+    joystickStick.style.transform =
+        "translate(0,0)";
+}
+
+
+/* =========================================================
+   MOBİL KAMERA
+========================================================= */
+
+const lookArea = document.getElementById("lookArea");
+
+let look = {
+    active: false,
+    lastX: 0,
+    lastY: 0
+};
+
+lookArea.addEventListener("pointerdown", function(e) {
+
+    look.active = true;
+
+    look.lastX = e.clientX;
+    look.lastY = e.clientY;
+
+    lookArea.setPointerCapture(e.pointerId);
+
+});
+
+lookArea.addEventListener("pointermove", function(e) {
+
+    if (!look.active) return;
+
+    const dx = e.clientX - look.lastX;
+    const dy = e.clientY - look.lastY;
+
+    player.yaw += dx * 0.35;
+    player.pitch -= dy * 0.25;
+
+    player.pitch =
+        Math.max(-55, Math.min(55, player.pitch));
+
+    look.lastX = e.clientX;
+    look.lastY = e.clientY;
+
+});
+
+lookArea.addEventListener("pointerup", function() {
+    look.active = false;
+});
+
+lookArea.addEventListener("pointercancel", function() {
+    look.active = false;
+});
+
+
+/* =========================================================
+   PC KLAVYE
+========================================================= */
+
+const keys = {};
+
+window.addEventListener("keydown", function(e) {
+
+    keys[e.key.toLowerCase()] = true;
+
+    if (
+        e.key === "ArrowUp" ||
+        e.key === "ArrowDown" ||
+        e.key === "ArrowLeft" ||
+        e.key === "ArrowRight"
+    ) {
+        e.preventDefault();
+    }
+
+});
+
+window.addEventListener("keyup", function(e) {
+
+    keys[e.key.toLowerCase()] = false;
+
+});
+
+
+/* =========================================================
+   PC MOUSE
+========================================================= */
+
+let mouseLocked = false;
+
+canvas.addEventListener("click", function() {
+
+    if (window.innerWidth > 768) {
+
+        canvas.requestPointerLock =
+            canvas.requestPointerLock ||
+            canvas.mozRequestPointerLock;
+
+        if (canvas.requestPointerLock) {
+            canvas.requestPointerLock();
+        }
+
+    }
+
+});
+
+document.addEventListener("pointerlockchange", function() {
+
+    mouseLocked =
+        document.pointerLockElement === canvas;
+
+});
+
+document.addEventListener("mousemove", function(e) {
+
+    if (!mouseLocked) return;
+
+    player.yaw += e.movementX * 0.15;
+    player.pitch -= e.movementY * 0.12;
+
+    player.pitch =
+        Math.max(-55, Math.min(55, player.pitch));
+
+});
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+const questionText = document.getElementById("question");
+const answerA = document.getElementById("answerA");
+const answerB = document.getElementById("answerB");
+const checkpointText = document.getElementById("checkpoint");
+
+function updateHUD() {
+
+    if (completed) return;
+
+    const q = QUESTIONS[currentQuestion];
+
+    questionText.textContent =
+        `Soru ${currentQuestion + 1}/50: ${q.q}`;
+
+    answerA.textContent =
+        `SOL KAPI [A]: ${q.a}`;
+
+    answerB.textContent =
+        `SAĞ KAPI [B]: ${q.b}`;
+
+    checkpointText.textContent =
+        `Son Checkpoint: Soru ${checkpoint + 1}`;
+}
+
+updateHUD();
+
+
+/* =========================================================
+   OYUNCU HAREKETİ
+========================================================= */
+
+function updatePlayer(dt) {
+
+    if (completed) return;
+
+    let forward = 0;
+    let strafe = 0;
+
+    /* PC */
+
+    if (keys["w"]) forward += 1;
+    if (keys["s"]) forward -= 1;
+
+    if (keys["a"]) strafe -= 1;
+    if (keys["d"]) strafe += 1;
+
+    /* Mobil joystick */
+
+    if (Math.abs(joystick.y) > 0.05) {
+        forward += -joystick.y;
+    }
+
+    if (Math.abs(joystick.x) > 0.05) {
+        strafe += joystick.x;
+    }
+
+    let length =
+        Math.sqrt(forward * forward + strafe * strafe);
+
+    if (length > 1) {
+
+        forward /= length;
+        strafe /= length;
+
+    }
+
+    const yaw =
+        player.yaw * Math.PI / 180;
+
+    const fx =
+        -Math.sin(yaw);
+
+    const fz =
+        -Math.cos(yaw);
+
+    const rx =
+        Math.cos(yaw);
+
+    const rz =
+        -Math.sin(yaw);
+
+    player.x +=
+        (fx * forward + rx * strafe)
+        * player.speed * dt;
+
+    player.z +=
+        (fz * forward + rz * strafe)
+        * player.speed * dt;
+
+    player.x =
+        Math.max(-9, Math.min(9, player.x));
+
+    /* Kapıya ulaştı mı? */
+
+    if (player.z < -12) {
+
+        const chosenDoor =
+            player.x < 0 ? "A" : "B";
+
+        checkAnswer(chosenDoor);
+
+    }
+}
+
+
+/* =========================================================
+   CEVAP
+========================================================= */
+
+function checkAnswer(chosenDoor) {
+
+    const q =
+        QUESTIONS[currentQuestion];
+
+    if (chosenDoor === q.correct) {
+
+        currentQuestion++;
+
+        if (currentQuestion % 5 === 0) {
+            checkpoint = currentQuestion;
+        }
+
+        if (currentQuestion >= QUESTIONS.length) {
+
+            completed = true;
+
+            document.getElementById("winScreen").style.display =
+                "flex";
+
+            return;
+        }
+
+        player.x = 0;
+        player.z = 6;
+
+        updateHUD();
+
+    } else {
+
+        player.x = 0;
+        player.z = 6;
+
+        player.yaw = 0;
+        player.pitch = 0;
+
+        currentQuestion = checkpoint;
+
+        updateHUD();
+
+        flashWrong();
+
+    }
+}
+
+
+/* =========================================================
+   YANLIŞ CEVAP EFEKTİ
+========================================================= */
+
+let wrongFlash = 0;
+
+function flashWrong() {
+
+    wrongFlash = 0.35;
+
+}
+
+
+/* =========================================================
+   3D BENZERİ ÇİZİM
+========================================================= */
+
+function project(x, y, z) {
+
+    const yaw =
+        player.yaw * Math.PI / 180;
+
+    const pitch =
+        player.pitch * Math.PI / 180;
+
+    let dx = x - player.x;
+    let dy = y - 2;
+    let dz = z - player.z;
+
+    /* Yaw */
+
+    let cosY = Math.cos(yaw);
+    let sinY = Math.sin(yaw);
+
+    let cx =
+        dx * cosY - dz * sinY;
+
+    let cz =
+        dx * sinY + dz * cosY;
+
+    /* Pitch */
+
+    let cosP = Math.cos(pitch);
+    let sinP = Math.sin(pitch);
+
+    let cy =
+        dy * cosP - cz * sinP;
+
+    let depth =
+        dy * sinP + cz * cosP;
+
+    if (depth > -0.1) {
+        return null;
+    }
+
+    const focal =
+        Math.min(W, H) * 0.9;
+
+    return {
+        x: W / 2 + cx * focal / -depth,
+        y: H / 2 - cy * focal / -depth,
+        depth: -depth
+    };
+}
+
+
+/* =========================================================
+   KÜP / DİKDÖRTGEN
+========================================================= */
+
+function drawWorldRect(
+    x,
+    y,
+    z,
+    width,
+    height,
+    color
+) {
+
+    const p =
+        project(x, y, z);
+
+    if (!p) return;
+
+    const distance = p.depth;
+
+    const scale =
+        Math.min(W,H) * 0.9 / distance;
+
+    const w =
+        width * scale;
+
+    const h =
+        height * scale;
+
+    ctx.fillStyle = color;
+
+    ctx.fillRect(
+        p.x - w / 2,
+        p.y - h / 2,
+        w,
+        h
+    );
+}
+
+
+/* =========================================================
+   SAHNE
+========================================================= */
+
+function drawScene() {
+
+    /* Gökyüzü */
+
+    const gradient =
+        ctx.createLinearGradient(
+            0, 0, 0, H
+        );
+
+    gradient.addColorStop(
+        0,
+        "#101923"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#27313b"
+    );
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        H
+    );
+
+
+    /* Zemin */
+
+    const horizon =
+        H * 0.52;
+
+    ctx.fillStyle =
+        "#303943";
+
+    ctx.fillRect(
+        0,
+        horizon,
+        W,
+        H - horizon
+    );
+
+
+    /* Zemin çizgileri */
+
+    for (let z = -5; z > -45; z -= 3) {
+
+        const p1 =
+            project(-11, 0, z);
+
+        const p2 =
+            project(11, 0, z);
+
+        if (p1 && p2) {
+
+            ctx.strokeStyle =
+                "rgba(255,255,255,0.08)";
+
+            ctx.lineWidth = 1;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                p1.x,
+                p1.y
+            );
+
+            ctx.lineTo(
+                p2.x,
+                p2.y
+            );
+
+            ctx.stroke();
+
+        }
+
+    }
+
+
+    /* Sol duvar */
+
+    drawWorldRect(
+        -11,
+        4,
+        -10,
+        0.5,
+        8,
+        "#59636d"
+    );
+
+
+    /* Sağ duvar */
+
+    drawWorldRect(
+        11,
+        4,
+        -10,
+        0.5,
+        8,
+        "#59636d"
+    );
+
+
+    /* Tavan */
+
+    drawWorldRect(
+        0,
+        8,
+        -10,
+        22,
+        0.3,
+        "#222a32"
+    );
+
+
+    /* Kapılar */
+
+    drawWorldRect(
+        -5,
+        3,
+        -13,
+        5.5,
+        6,
+        "#0879d1"
+    );
+
+    drawWorldRect(
+        5,
+        3,
+        -13,
+        5.5,
+        6,
+        "#e78b10"
+    );
+
+
+    /* Kapı yazıları */
+
+    drawDoorText(
+        -5,
+        3,
+        -13,
+        "A"
+    );
+
+    drawDoorText(
+        5,
+        3,
+        -13,
+        "B"
+    );
+
+
+    /* Orta kolon */
+
+    drawWorldRect(
+        0,
+        4,
+        -13,
+        1.2,
+        8,
+        "#68727c"
+    );
+
+
+    /* Duvar yönlendirme */
+
+    drawWorldText(
+        -5,
+        6.7,
+        -13,
+        "A"
+    );
+
+    drawWorldText(
+        5,
+        6.7,
+        -13,
+        "B"
+    );
+
+
+    /* Uzak ışık */
+
+    const light =
+        project(0, 4, -25);
+
+    if (light) {
+
+        const radius =
+            Math.max(
+                10,
+                500 / light.depth
+            );
+
+        const g =
+            ctx.createRadialGradient(
+                light.x,
+                light.y,
+                0,
+                light.x,
+                light.y,
+                radius
+            );
+
+        g.addColorStop(
+            0,
+            "rgba(255,255,255,0.18)"
+        );
+
+        g.addColorStop(
+            1,
+            "rgba(255,255,255,0)"
+        );
+
+        ctx.fillStyle = g;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            light.x,
+            light.y,
+            radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
+}
+
+
+/* =========================================================
+   KAPI YAZISI
+========================================================= */
+
+function drawDoorText(
+    x,
+    y,
+    z,
+    text
+) {
+
+    const p =
+        project(x,y,z);
+
+    if (!p) return;
+
+    const size =
+        Math.max(
+            20,
+            Math.min(
+                100,
+                500 / p.depth
+            )
+        );
+
+    ctx.save();
+
+    ctx.font =
+        `bold ${size}px Arial`;
+
+    ctx.textAlign =
+        "center";
+
+    ctx.textBaseline =
+        "middle";
+
+    ctx.fillStyle =
+        "white";
+
+    ctx.shadowColor =
+        "rgba(0,0,0,0.7)";
+
+    ctx.shadowBlur = 8;
+
+    ctx.fillText(
+        text,
+        p.x,
+        p.y
+    );
+
+    ctx.restore();
+}
+
+
+function drawWorldText(
+    x,
+    y,
+    z,
+    text
+) {
+
+    const p =
+        project(x,y,z);
+
+    if (!p) return;
+
+    const size =
+        Math.max(
+            14,
+            Math.min(
+                45,
+                250 / p.depth
+            )
+        );
+
+    ctx.save();
+
+    ctx.font =
+        `bold ${size}px Arial`;
+
+    ctx.textAlign =
+        "center";
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.8)";
+
+    ctx.fillText(
+        text,
+        p.x,
+        p.y
+    );
+
+    ctx.restore();
+}
+
+
+/* =========================================================
+   OYUN DÖNGÜSÜ
+========================================================= */
+
+let lastTime =
+    performance.now();
+
+function gameLoop(time) {
+
+    const dt =
+        Math.min(
+            (time - lastTime) / 1000,
+            0.05
+        );
+
+    lastTime = time;
+
+    updatePlayer(dt);
+
+    drawScene();
+
+    if (wrongFlash > 0) {
+
+        wrongFlash -= dt;
+
+        ctx.fillStyle =
+            `rgba(255,0,0,${wrongFlash * 0.7})`;
+
+        ctx.fillRect(
+            0,
+            0,
+            W,
+            H
+        );
+
+    }
+
+    requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);
+
+
+/* =========================================================
+   YENİDEN BAŞLAT
+========================================================= */
+
+document.getElementById("restart")
+.addEventListener("click", function() {
+
+    currentQuestion = 0;
+    checkpoint = 0;
+    completed = false;
+
+    player.x = 0;
+    player.z = 6;
+    player.yaw = 0;
+    player.pitch = 0;
+
+    document.getElementById("winScreen")
+        .style.display = "none";
+
+    updateHUD();
+
+});
+
+
+/* =========================================================
+   MOBİLDE SAYFANIN KAYMASINI ENGELLE
+========================================================= */
+
+document.addEventListener(
+    "touchmove",
+    function(e) {
+        e.preventDefault();
+    },
+    {passive:false}
+);
+
+</script>
+
+</body>
+</html>
