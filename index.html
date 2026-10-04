@@ -1,0 +1,4266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TÜRK MİLLETİ 🇹🇷</title>
+
+<style>
+
+:root{
+    --accent:#e30613;
+    --accent-dark:#b30000;
+    --gold:#d4af37;
+    --gold-light:#ffd700;
+    --page:#f3f3f3;
+    --text:#222;
+    --card:#fff;
+    --soft:#ededed;
+    --header:#b30000;
+    --hero1:#b30000;
+    --hero2:#111;
+    --dark:#171717;
+    --dark2:#252525;
+    --shadow:0 8px 25px rgba(0,0,0,.18);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:var(--page);
+    color:var(--text);
+    transition:.25s;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ========================================================= */
+/* HEADER */
+/* ========================================================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:var(--header);
+    color:#fff;
+    padding:14px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    box-shadow:0 3px 15px rgba(0,0,0,.35);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+nav{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    cursor:pointer;
+}
+
+nav a:hover{
+    color:var(--gold-light);
+}
+
+.header-tools{
+    display:flex;
+    gap:7px;
+    align-items:center;
+    position:relative;
+}
+
+.search-input{
+    width:180px;
+    padding:9px 11px;
+    border:0;
+    border-radius:8px;
+    outline:none;
+}
+
+.header-button{
+    border:0;
+    border-radius:8px;
+    padding:9px 11px;
+    font-weight:700;
+}
+
+.search-button{
+    background:#fff;
+    color:#111;
+}
+
+.theme-button{
+    background:#111;
+    color:#fff;
+}
+
+/* ========================================================= */
+/* TEMA MENÜSÜ */
+/* ========================================================= */
+
+.theme-menu{
+    position:absolute;
+    right:0;
+    top:48px;
+    width:190px;
+    background:var(--card);
+    color:var(--text);
+    border:2px solid var(--accent);
+    border-radius:12px;
+    padding:8px;
+    box-shadow:var(--shadow);
+    display:none;
+}
+
+.theme-menu.show{
+    display:block;
+}
+
+.theme-menu button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:inherit;
+    text-align:left;
+    padding:10px 12px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+.theme-menu button:hover{
+    background:var(--soft);
+}
+
+/* ========================================================= */
+/* ARAMA */
+/* ========================================================= */
+
+.search-results{
+    position:fixed;
+    z-index:2000;
+    top:80px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(760px,calc(100% - 24px));
+    background:var(--card);
+    color:var(--text);
+    border:2px solid var(--accent);
+    border-radius:14px;
+    padding:14px;
+    box-shadow:var(--shadow);
+    display:none;
+}
+
+.search-results.show{
+    display:block;
+}
+
+.search-results-title{
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.search-result{
+    width:100%;
+    border:1px solid #ccc;
+    background:transparent;
+    color:inherit;
+    border-radius:8px;
+    padding:10px;
+    text-align:left;
+    margin-top:7px;
+}
+
+/* ========================================================= */
+/* ÖZELLİK MENÜSÜ */
+/* ========================================================= */
+
+.feature-nav{
+    margin-top:76px;
+    background:#222;
+    padding:14px;
+    text-align:center;
+}
+
+.feature-nav button{
+    border:0;
+    padding:11px 16px;
+    margin:4px;
+    border-radius:9px;
+    font-weight:800;
+}
+
+.feature-nav button:hover{
+    transform:translateY(-2px);
+}
+
+.feature-btn{
+    background:#4b4b4b;
+    color:white;
+}
+
+.turkiye-btn{
+    background:#e30613;
+    color:#fff;
+}
+
+.osmanli-btn{
+    background:#c9a227;
+    color:#111;
+}
+
+.oyun-btn{
+    background:#333;
+    color:#ffd700;
+}
+
+/* ========================================================= */
+/* ANA SAYFA */
+/* ========================================================= */
+
+#anasayfa{
+    padding-top:0;
+}
+
+.hero{
+    min-height:100vh;
+    padding:120px 20px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:#fff;
+    background:
+        linear-gradient(rgba(0,0,0,.47),rgba(0,0,0,.58)),
+        linear-gradient(135deg,var(--hero1),var(--hero2));
+}
+
+.hero h1{
+    font-size:58px;
+    margin-bottom:16px;
+}
+
+.hero p{
+    max-width:850px;
+    font-size:20px;
+    line-height:1.65;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin-top:30px;
+}
+
+.hero-button{
+    border:2px solid white;
+    background:rgba(255,255,255,.08);
+    color:white;
+    border-radius:11px;
+    padding:14px 20px;
+    font-size:16px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.hero-button:hover{
+    background:#fff;
+    color:#111;
+    transform:translateY(-3px);
+}
+
+/* ========================================================= */
+/* GENEL */
+/* ========================================================= */
+
+.container{
+    max-width:1150px;
+    margin:auto;
+}
+
+section{
+    padding:70px 20px;
+}
+
+section h2{
+    text-align:center;
+    font-size:37px;
+    margin-bottom:30px;
+}
+
+.section-intro{
+    text-align:center;
+    max-width:850px;
+    margin:-10px auto 30px;
+    line-height:1.7;
+    opacity:.82;
+}
+
+/* ========================================================= */
+/* KART */
+/* ========================================================= */
+
+.card{
+    background:var(--card);
+    color:var(--text);
+    padding:28px;
+    margin:24px 0;
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(0,0,0,.08);
+}
+
+.card h3{
+    color:var(--accent-dark);
+    margin-bottom:13px;
+    font-size:26px;
+}
+
+.card p{
+    line-height:1.8;
+    font-size:17px;
+}
+
+audio{
+    width:100%;
+    margin-top:18px;
+}
+
+/* ========================================================= */
+/* FOTOĞRAFLAR */
+/* ========================================================= */
+
+.ataturk-foto,
+.mehmet-foto,
+.inonu-foto,
+.fatih-foto,
+.yavuz-foto{
+    display:block;
+    width:280px;
+    max-width:100%;
+    height:auto;
+    margin:0 auto 22px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.4);
+}
+
+/* ========================================================= */
+/* TÜRKİYE */
+/* ========================================================= */
+
+#turkiye{
+    background:#181818;
+    color:#fff;
+}
+
+#turkiye h2{
+    color:#e30613;
+}
+
+#turkiye .card{
+    background:#262626;
+    color:#fff;
+    border-left:5px solid #b30000;
+    border-top:0;
+    border-right:0;
+    border-bottom:0;
+}
+
+#turkiye .card h3{
+    color:#e30613;
+}
+
+#turkiye .card p{
+    color:#ddd;
+}
+
+.timeline{
+    border-left:5px solid #b30000;
+    padding-left:24px;
+    max-width:900px;
+    margin:auto;
+}
+
+.timeline-item{
+    margin-bottom:22px;
+    background:#262626;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #333;
+}
+
+.timeline-item h3{
+    color:#e30613;
+    margin-bottom:8px;
+}
+
+.timeline-item p{
+    color:#ddd;
+    line-height:1.75;
+}
+
+/* ========================================================= */
+/* OSMANLI */
+/* ========================================================= */
+
+#osmanli{
+    background:#181818;
+    color:#fff;
+}
+
+.osmanli-section h2{
+    color:#d4af37;
+}
+
+.osmanli-card{
+    background:#262626;
+    color:#fff;
+    border-left:5px solid #d4af37;
+    border-top:0;
+    border-right:0;
+    border-bottom:0;
+}
+
+.osmanli-card h3{
+    color:#d4af37;
+}
+
+.osmanli-card p{
+    color:#ddd;
+}
+
+.osmanli-timeline{
+    border-left:5px solid #d4af37;
+    padding-left:24px;
+    max-width:900px;
+    margin:auto;
+}
+
+.osmanli-timeline .timeline-item{
+    background:#262626;
+}
+
+.osmanli-timeline .timeline-item h3{
+    color:#d4af37;
+}
+
+/* ========================================================= */
+/* ÖZELLİK SAYFALARI */
+/* ========================================================= */
+
+.feature-page{
+    padding-top:30px;
+}
+
+.dark-feature{
+    background:#121212;
+    color:#fff;
+}
+
+.dark-feature h2{
+    color:#ffd700;
+}
+
+/* ========================================================= */
+/* ZAMAN MAKİNESİ */
+/* ========================================================= */
+
+.time-machine{
+    background:linear-gradient(145deg,#101010,#242424);
+    border:2px solid #b30000;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:var(--shadow);
+}
+
+.time-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:9px;
+    margin-bottom:20px;
+}
+
+.time-button{
+    background:#2c2c2c;
+    color:#fff;
+    border:2px solid #555;
+    border-radius:10px;
+    padding:11px 15px;
+    font-weight:800;
+}
+
+.time-button:hover,
+.time-button.active{
+    background:#b30000;
+    border-color:#e30613;
+}
+
+.time-result{
+    background:#171717;
+    border:1px solid #363636;
+    border-radius:13px;
+    padding:24px;
+    min-height:150px;
+}
+
+.time-result h3{
+    color:#ffd700;
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.time-result p{
+    color:#ddd;
+    line-height:1.8;
+}
+
+/* ========================================================= */
+/* HARİTA */
+/* ========================================================= */
+
+.map-card{
+    background:var(--card);
+    color:var(--text);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+.map-wrap{
+    max-width:950px;
+    margin:auto;
+}
+
+#turkeyMap{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:16px;
+    background:linear-gradient(#dfeeff,#edf8ff);
+}
+
+.map-outline{
+    fill:#f1c95e;
+    stroke:#8e6b10;
+    stroke-width:4;
+    stroke-linejoin:round;
+}
+
+.map-marker{
+    fill:#d71920;
+    stroke:#fff;
+    stroke-width:3;
+    cursor:pointer;
+    transition:.18s;
+}
+
+.map-marker:hover{
+    fill:#111;
+    transform-origin:center;
+    transform-box:fill-box;
+    transform:scale(1.2);
+}
+
+.map-label{
+    font-size:15px;
+    font-weight:800;
+    fill:#111;
+    pointer-events:none;
+}
+
+.city-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-top:18px;
+}
+
+.city-button{
+    background:#b30000;
+    color:#fff;
+    border:0;
+    border-radius:9px;
+    padding:9px 13px;
+    font-weight:800;
+}
+
+.city-info{
+    margin-top:18px;
+    background:var(--soft);
+    padding:18px;
+    border-radius:12px;
+    line-height:1.75;
+}
+
+.city-info h3{
+    margin-bottom:7px;
+    color:var(--accent-dark);
+}
+
+/* ========================================================= */
+/* QUIZ */
+/* ========================================================= */
+
+.quiz-container{
+    max-width:900px;
+    margin:auto;
+    background:linear-gradient(145deg,#141414,#2a2a2a);
+    border:2px solid #b30000;
+    border-radius:18px;
+    padding:27px;
+    box-shadow:var(--shadow);
+}
+
+.quiz-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.quiz-counter,
+.quiz-score{
+    background:#0d0d0d;
+    color:#ffd700;
+    padding:9px 12px;
+    border-radius:9px;
+    font-weight:800;
+}
+
+.question{
+    color:#fff;
+    font-size:24px;
+    line-height:1.45;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.answers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.answer-button{
+    background:#292929;
+    color:#fff;
+    border:2px solid #454545;
+    border-radius:12px;
+    padding:16px;
+    text-align:left;
+    font-weight:700;
+}
+
+.answer-button:hover{
+    border-color:#e30613;
+}
+
+.answer-button.correct{
+    background:#176b3a;
+    border-color:#38d878;
+}
+
+.answer-button.wrong{
+    background:#7f1d1d;
+    border-color:#ff6565;
+}
+
+.answer-button:disabled{
+    cursor:default;
+}
+
+.quiz-result{
+    text-align:center;
+    background:#0d0d0d;
+    padding:25px;
+    border-radius:13px;
+    color:#fff;
+}
+
+.quiz-result h3{
+    color:#ffd700;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.quiz-button{
+    border:0;
+    background:#b30000;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:9px;
+    font-weight:800;
+    margin-top:18px;
+}
+
+/* ========================================================= */
+/* SANAL MÜZE */
+/* ========================================================= */
+
+.museum{
+    background:
+        radial-gradient(circle at top,#4a3a1d 0%,#1e1a10 36%,#0d0d0d 100%);
+    border:2px solid #8f742d;
+    border-radius:18px;
+    padding:30px;
+    color:#fff;
+    box-shadow:var(--shadow);
+}
+
+.museum-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.museum-header h3{
+    font-size:31px;
+    color:#ffd700;
+    margin-bottom:7px;
+}
+
+.museum-floor{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:17px;
+}
+
+.exhibit{
+    background:linear-gradient(145deg,#292419,#17130d);
+    border:1px solid #6f5723;
+    border-radius:13px;
+    padding:20px;
+    text-align:center;
+    transition:.2s;
+}
+
+.exhibit:hover{
+    transform:translateY(-4px);
+    border-color:#ffd700;
+}
+
+.exhibit-icon{
+    font-size:58px;
+    margin-bottom:9px;
+}
+
+.exhibit h4{
+    color:#ffd700;
+    font-size:20px;
+    margin-bottom:7px;
+}
+
+.exhibit p{
+    color:#ccc;
+    line-height:1.55;
+}
+
+/* ========================================================= */
+/* BİLGİLER */
+/* ========================================================= */
+
+.fact-box{
+    max-width:900px;
+    margin:auto;
+    background:linear-gradient(135deg,#b30000,#460000);
+    color:#fff;
+    padding:30px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.fact-label{
+    color:#ffd700;
+    font-weight:900;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.fact-text{
+    font-size:22px;
+    line-height:1.7;
+}
+
+.fact-button{
+    border:0;
+    background:#fff;
+    color:#111;
+    padding:11px 18px;
+    border-radius:9px;
+    font-weight:800;
+    margin-top:18px;
+}
+
+/* ========================================================= */
+/* BAŞARILAR */
+/* ========================================================= */
+
+.achievements-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.achievement{
+    background:var(--card);
+    color:var(--text);
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    border:2px solid #ddd;
+    box-shadow:0 5px 16px rgba(0,0,0,.08);
+}
+
+.achievement.unlocked{
+    border-color:#d4af37;
+}
+
+.achievement.locked{
+    opacity:.45;
+    filter:grayscale(1);
+}
+
+.achievement-icon{
+    font-size:44px;
+    margin-bottom:8px;
+}
+
+.achievement h4{
+    margin-bottom:5px;
+}
+
+/* ========================================================= */
+/* MODAL */
+/* ========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.76);
+    z-index:3000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.modal-box{
+    position:relative;
+    width:min(680px,100%);
+    background:#1b1b1b;
+    color:#fff;
+    border:2px solid #b30000;
+    border-radius:17px;
+    padding:28px;
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.modal-close{
+    position:absolute;
+    top:8px;
+    right:12px;
+    background:transparent;
+    border:0;
+    color:#fff;
+    font-size:30px;
+}
+
+.modal-box h3{
+    color:#ffd700;
+    margin-bottom:12px;
+    font-size:28px;
+}
+
+.modal-box p{
+    line-height:1.8;
+    color:#ddd;
+}
+
+/* ========================================================= */
+/* OYUNLAR */
+/* ========================================================= */
+
+#oyunlar{
+    background:linear-gradient(135deg,#101010,#292929);
+    color:#fff;
+}
+
+#oyunlar h2{
+    color:#ffd700;
+}
+
+.games-container{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+}
+
+.game-card{
+    background:linear-gradient(145deg,#1c1c1c,#333);
+    border:2px solid #b30000;
+    border-radius:18px;
+    padding:31px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.game-icon{
+    font-size:66px;
+}
+
+.game-badge{
+    display:inline-block;
+    background:#b30000;
+    color:#fff;
+    padding:7px 14px;
+    border-radius:20px;
+    font-weight:800;
+    margin:8px 0 17px;
+}
+
+.game-card h3{
+    font-size:28px;
+    color:#ff4a4a;
+    margin-bottom:12px;
+}
+
+.game-card>p{
+    color:#ddd;
+    line-height:1.7;
+    font-size:17px;
+}
+
+.game-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:22px 0;
+}
+
+.game-info-box{
+    background:#111;
+    padding:16px;
+    border-radius:10px;
+}
+
+.game-info-box strong{
+    display:block;
+    color:#ffd700;
+    margin-bottom:6px;
+}
+
+.controls{
+    background:#111;
+    border-radius:10px;
+    padding:18px;
+    margin:18px 0;
+}
+
+.controls h4{
+    color:#ffd700;
+    margin-bottom:9px;
+}
+
+.game-button{
+    display:inline-block;
+    background:#b30000;
+    color:#fff;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:10px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.game-button:hover{
+    background:#e30613;
+    transform:translateY(-2px);
+}
+
+.game-note{
+    font-size:13px!important;
+    color:#aaa!important;
+    margin-top:15px;
+}
+
+/* ========================================================= */
+/* FOOTER */
+/* ========================================================= */
+
+footer{
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:30px;
+    line-height:1.7;
+}
+
+/* ========================================================= */
+/* AÇIK TEMA */
+/* ========================================================= */
+
+body.theme-light{
+    --page:#f5f5f5;
+    --text:#202020;
+    --card:#fff;
+    --soft:#ececec;
+    --header:#c51622;
+    --hero1:#dd1d27;
+    --hero2:#444;
+}
+
+body.theme-light .dark-feature{
+    background:#ededed;
+    color:#202020;
+}
+
+body.theme-light .dark-feature h2{
+    color:#b30000;
+}
+
+body.theme-light .time-machine,
+body.theme-light .quiz-container{
+    background:linear-gradient(145deg,#fff,#e8e8e8);
+}
+
+body.theme-light .time-result,
+body.theme-light .quiz-result{
+    background:#fff;
+    color:#111;
+}
+
+body.theme-light .time-result p,
+body.theme-light .question{
+    color:#222;
+}
+
+body.theme-light .time-button,
+body.theme-light .answer-button{
+    background:#fff;
+    color:#222;
+    border-color:#bbb;
+}
+
+/* ========================================================= */
+/* OSMANLI TEMASI */
+/* ========================================================= */
+
+body.theme-osmanli{
+    --page:#efe9da;
+    --text:#2c2417;
+    --card:#fffaf0;
+    --soft:#e3dac5;
+    --header:#3c2e16;
+    --hero1:#6b531d;
+    --hero2:#18140d;
+    --accent:#b48a25;
+    --accent-dark:#795b16;
+}
+
+body.theme-osmanli .feature-nav{
+    background:#241c0e;
+}
+
+/* ========================================================= */
+/* MOBİL */
+/* ========================================================= */
+
+@media(max-width:1050px){
+
+    header{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .logo{
+        width:100%;
+        text-align:center;
+    }
+
+    .header-tools{
+        width:100%;
+        justify-content:center;
+    }
+
+    .achievements-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .museum-floor{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    nav{
+        gap:9px;
+    }
+
+    .hero h1{
+        font-size:41px;
+    }
+
+    .hero p{
+        font-size:17px;
+    }
+
+    .games-container{
+        grid-template-columns:1fr;
+    }
+
+    .game-info{
+        grid-template-columns:1fr;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .museum-floor{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:580px){
+
+    header{
+        position:sticky;
+    }
+
+    .feature-nav{
+        margin-top:0;
+    }
+
+    .search-input{
+        width:100%;
+    }
+
+    .header-tools{
+        flex-wrap:wrap;
+    }
+
+    .hero{
+        padding:70px 15px 40px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .hero-buttons{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .hero-button{
+        width:100%;
+    }
+
+    section{
+        padding:55px 14px;
+    }
+
+    section h2{
+        font-size:29px;
+    }
+
+    .achievements-grid{
+        grid-template-columns:1fr;
+    }
+
+    .feature-nav button{
+        width:100%;
+        margin:4px 0;
+    }
+
+    .game-card{
+        padding:24px 16px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!-- HEADER -->
+<!-- ========================================================= -->
+
+<header>
+
+    <div class="logo">
+        🇹🇷 TÜRK MİLLETİ
+    </div>
+
+    <nav>
+
+        <a onclick="showAnaSayfa()">
+            Ana Sayfa
+        </a>
+
+        <a onclick="showTurkiye()">
+            Türkiye
+        </a>
+
+        <a onclick="showOsmanli()">
+            Osmanlı
+        </a>
+
+        <a onclick="showOyunlar()">
+            🎮 Oyunlar
+        </a>
+
+    </nav>
+
+    <div class="header-tools">
+
+        <input
+            id="searchInput"
+            class="search-input"
+            type="search"
+            placeholder="🔎 Sitede ara..."
+            onkeydown="handleSearchKey(event)"
+        >
+
+        <button
+            class="header-button search-button"
+            onclick="searchSite()"
+        >
+            Ara
+        </button>
+
+        <button
+            class="header-button theme-button"
+            onclick="toggleThemeMenu()"
+        >
+            🎨 Tema
+        </button>
+
+        <div
+            id="themeMenu"
+            class="theme-menu"
+        >
+
+            <button onclick="setTheme('dark')">
+                🌑 Koyu Tema
+            </button>
+
+            <button onclick="setTheme('light')">
+                ☀️ Açık Tema
+            </button>
+
+            <button onclick="setTheme('osmanli')">
+                ☪️ Osmanlı Teması
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+<div
+    id="searchResults"
+    class="search-results"
+></div>
+
+<!-- ========================================================= -->
+<!-- ANA SAYFA -->
+<!-- ========================================================= -->
+
+<div id="anasayfa">
+
+    <section class="hero">
+
+        <h1>
+            TÜRK MİLLETİ 🇹🇷
+        </h1>
+
+        <p>
+            Türk tarihinin önemli dönemlerini,
+            mücadelelerini, kültürel mirasını ve
+            tarihî gelişimini etkileşimli bölümlerle keşfet.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="hero-button"
+                onclick="showFeature('zamanPage')"
+            >
+                ⏳ Zaman Makinesine Git
+            </button>
+
+            <button
+                class="hero-button"
+                onclick="showFeature('haritaPage')"
+            >
+                🗺️ Haritayı Aç
+            </button>
+
+            <button
+                class="hero-button"
+                onclick="showFeature('quizPage')"
+            >
+                🧠 Yarışmaya Başla
+            </button>
+
+            <button
+                class="hero-button"
+                onclick="showFeature('muzePage')"
+            >
+                🏛️ Müzeyi Gez
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- ÖZELLİK MENÜSÜ -->
+<!-- ========================================================= -->
+
+<div
+    id="featureNav"
+    class="feature-nav hidden"
+>
+
+    <button
+        class="feature-btn"
+        onclick="showFeature('zamanPage')"
+    >
+        ⏳ Zaman Makinesi
+    </button>
+
+    <button
+        class="feature-btn"
+        onclick="showFeature('haritaPage')"
+    >
+        🗺️ Harita
+    </button>
+
+    <button
+        class="feature-btn"
+        onclick="showFeature('quizPage')"
+    >
+        🧠 Bilgi Yarışması
+    </button>
+
+    <button
+        class="feature-btn"
+        onclick="showFeature('muzePage')"
+    >
+        🏛️ Sanal Müze
+    </button>
+
+    <button
+        class="feature-btn"
+        onclick="showFeature('bilgilerPage')"
+    >
+        📚 Bilgiler
+    </button>
+
+    <button
+        class="feature-btn"
+        onclick="showFeature('basarilarPage')"
+    >
+        🏆 Başarılar
+    </button>
+
+    <button
+        class="turkiye-btn"
+        onclick="showTurkiye()"
+    >
+        🇹🇷 Türkiye
+    </button>
+
+    <button
+        class="osmanli-btn"
+        onclick="showOsmanli()"
+    >
+        ☪️ Osmanlı
+    </button>
+
+    <button
+        class="oyun-btn"
+        onclick="showOyunlar()"
+    >
+        🎮 Oyunlar
+    </button>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- ZAMAN MAKİNESİ -->
+<!-- ========================================================= -->
+
+<div
+    id="zamanPage"
+    class="hidden"
+>
+
+    <section class="feature-page dark-feature">
+
+        <div class="container">
+
+            <h2>
+                ⏳ Türk Tarihi Zaman Makinesi
+            </h2>
+
+            <p class="section-intro">
+                Bir tarih noktasına tıklayarak
+                o dönemin bilgisini aç.
+            </p>
+
+            <div class="time-machine">
+
+                <div
+                    id="timeButtons"
+                    class="time-buttons"
+                ></div>
+
+                <div
+                    id="timeResult"
+                    class="time-result"
+                >
+
+                    <h3>
+                        Bir dönem seç
+                    </h3>
+
+                    <p>
+                        Aşağıdaki yıllardan birine
+                        tıklayarak başlayabilirsin.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- HARİTA -->
+<!-- ========================================================= -->
+
+<div
+    id="haritaPage"
+    class="hidden"
+>
+
+    <section class="feature-page">
+
+        <div class="container">
+
+            <h2>
+                🗺️ Tarihî Şehirler Haritası
+            </h2>
+
+            <p class="section-intro">
+                Haritadaki kırmızı noktalara
+                veya şehir düğmelerine tıkla.
+            </p>
+
+            <div class="map-card">
+
+                <div class="map-wrap">
+
+                    <svg
+                        id="turkeyMap"
+                        viewBox="0 0 1000 450"
+                        aria-label="Türkiye tarihî şehirler haritası"
+                    >
+
+                        <path
+                            class="map-outline"
+                            d="
+                            M65 245
+                            L100 215
+                            L140 220
+                            L175 195
+                            L215 205
+                            L245 184
+                            L285 194
+                            L325 182
+                            L365 195
+                            L400 183
+                            L438 196
+                            L472 185
+                            L510 203
+                            L548 192
+                            L585 210
+                            L625 199
+                            L662 213
+                            L700 204
+                            L738 221
+                            L776 212
+                            L815 225
+                            L853 216
+                            L893 236
+                            L930 250
+                            L905 280
+                            L870 295
+                            L835 302
+                            L805 320
+                            L770 309
+                            L737 325
+                            L704 312
+                            L670 330
+                            L635 316
+                            L602 333
+                            L565 317
+                            L528 325
+                            L495 313
+                            L458 321
+                            L423 307
+                            L390 315
+                            L350 303
+                            L318 312
+                            L282 300
+                            L250 305
+                            L220 289
+                            L188 295
+                            L154 281
+                            L122 287
+                            L95 270
+                            Z
+                            "
+                        ></path>
+
+                        <g id="mapMarkers"></g>
+
+                    </svg>
+
+                </div>
+
+                <div
+                    id="cityButtons"
+                    class="city-buttons"
+                ></div>
+
+                <div
+                    id="cityInfo"
+                    class="city-info"
+                >
+
+                    <b>
+                        Bir şehir seç.
+                    </b>
+
+                    <br>
+
+                    Haritadaki noktaya
+                    veya şehir butonuna tıkla.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- QUIZ -->
+<!-- ========================================================= -->
+
+<div
+    id="quizPage"
+    class="hidden"
+>
+
+    <section class="feature-page dark-feature">
+
+        <div class="container">
+
+            <h2>
+                🧠 Türk Tarihi Bilgi Yarışması
+            </h2>
+
+            <p class="section-intro">
+                10 soruyu cevapla ve puanını yükselt.
+            </p>
+
+            <div class="quiz-container">
+
+                <div class="quiz-top">
+
+                    <div
+                        id="quizCounter"
+                        class="quiz-counter"
+                    >
+                        Soru 1 / 10
+                    </div>
+
+                    <div
+                        id="quizScore"
+                        class="quiz-score"
+                    >
+                        Puan: 0
+                    </div>
+
+                </div>
+
+                <div id="quizContent"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- SANAL MÜZE -->
+<!-- ========================================================= -->
+
+<div
+    id="muzePage"
+    class="hidden"
+>
+
+    <section class="feature-page">
+
+        <div class="container">
+
+            <h2>
+                🏛️ Sanal Müze
+            </h2>
+
+            <p class="section-intro">
+                Bir sergiye tıklayarak ayrıntılı bilgi aç.
+            </p>
+
+            <div class="museum">
+
+                <div class="museum-header">
+
+                    <h3>
+                        TÜRK TARİHİ SANAL MÜZESİ
+                    </h3>
+
+                    <p>
+                        Dijital müze salonlarına hoş geldin.
+                    </p>
+
+                </div>
+
+                <div class="museum-floor">
+
+                    <div
+                        class="exhibit"
+                        onclick="openMuseumItem('ataturk')"
+                    >
+
+                        <div class="exhibit-icon">
+                            🖼️
+                        </div>
+
+                        <h4>
+                            Atatürk Köşesi
+                        </h4>
+
+                        <p>
+                            Mustafa Kemal Atatürk
+                            hakkında bilgi.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="exhibit"
+                        onclick="openMuseumItem('istiklal')"
+                    >
+
+                        <div class="exhibit-icon">
+                            📜
+                        </div>
+
+                        <h4>
+                            İstiklâl Marşı
+                        </h4>
+
+                        <p>
+                            İstiklâl Marşı'nın tarihi.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="exhibit"
+                        onclick="openMuseumItem('fatih')"
+                    >
+
+                        <div class="exhibit-icon">
+                            🏰
+                        </div>
+
+                        <h4>
+                            İstanbul'un Fethi
+                        </h4>
+
+                        <p>
+                            1453 yılı ve fetih.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="exhibit"
+                        onclick="openMuseumItem('yavuz')"
+                    >
+
+                        <div class="exhibit-icon">
+                            ⚔️
+                        </div>
+
+                        <h4>
+                            Yavuz Sultan Selim
+                        </h4>
+
+                        <p>
+                            Osmanlı padişahı hakkında bilgi.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="exhibit"
+                        onclick="openMuseumItem('meclis')"
+                    >
+
+                        <div class="exhibit-icon">
+                            🏛️
+                        </div>
+
+                        <h4>
+                            TBMM
+                        </h4>
+
+                        <p>
+                            TBMM'nin açılışı.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="exhibit"
+                        onclick="openMuseumItem('kurtulus')"
+                    >
+
+                        <div class="exhibit-icon">
+                            🎖️
+                        </div>
+
+                        <h4>
+                            Millî Mücadele
+                        </h4>
+
+                        <p>
+                            Millî Mücadele dönemi.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- BİLGİLER -->
+<!-- ========================================================= -->
+
+<div
+    id="bilgilerPage"
+    class="hidden"
+>
+
+    <section class="feature-page">
+
+        <div class="container">
+
+            <h2>
+                📚 Rastgele Tarih Bilgisi
+            </h2>
+
+            <div class="fact-box">
+
+                <div class="fact-label">
+                    BİLGİ KARTI
+                </div>
+
+                <div
+                    id="factText"
+                    class="fact-text"
+                >
+                    Bilgi yükleniyor...
+                </div>
+
+                <button
+                    class="fact-button"
+                    onclick="showRandomFact()"
+                >
+                    🔄 Başka Bilgi Göster
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- BAŞARILAR -->
+<!-- ========================================================= -->
+
+<div
+    id="basarilarPage"
+    class="hidden"
+>
+
+    <section class="feature-page">
+
+        <div class="container">
+
+            <h2>
+                🏆 Başarılar
+            </h2>
+
+            <p class="section-intro">
+                Siteyi kullanırken farklı rozetlerin
+                kilidini aç.
+            </p>
+
+            <div
+                id="achievementsGrid"
+                class="achievements-grid"
+            ></div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- TÜRKİYE -->
+<!-- ========================================================= -->
+
+<div
+    id="turkiye"
+    class="hidden"
+>
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                🇹🇷 Mustafa Kemal Atatürk
+            </h2>
+
+            <div
+                class="card"
+                data-search="ataturk mustafa kemal cumhuriyet"
+            >
+
+                <img
+                    src="MustafaKemal.jpg"
+                    alt="Mustafa Kemal Atatürk"
+                    class="ataturk-foto"
+                >
+
+                <h3>
+                    Gazi Mustafa Kemal Atatürk
+                </h3>
+
+                <p>
+                    Mustafa Kemal Atatürk,
+                    Türkiye Cumhuriyeti'nin kurucusu
+                    ve ilk Cumhurbaşkanıdır.
+                    Kurtuluş Savaşı'nın önderliğini yapmış
+                    ve Cumhuriyet'in kurulmasına
+                    öncülük etmiştir.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                🇹🇷 İstiklâl Marşı
+            </h2>
+
+            <div class="card">
+
+                <img
+                    src="mehmet.jpg"
+                    alt="Mehmet Âkif Ersoy"
+                    class="mehmet-foto"
+                >
+
+                <h3>
+                    Türkiye Cumhuriyeti İstiklâl Marşı
+                </h3>
+
+                <p>
+                    Mehmet Âkif Ersoy tarafından yazılan
+                    İstiklâl Marşı, Türkiye Cumhuriyeti'nin
+                    millî marşıdır.
+                </p>
+
+                <audio controls>
+
+                    <source
+                        src="istiklal-marsi.mp3"
+                        type="audio/mpeg"
+                    >
+
+                    Tarayıcınız ses oynatmayı desteklemiyor.
+
+                </audio>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                🇹🇷 İsmet İnönü
+            </h2>
+
+            <div class="card">
+
+                <img
+                    src="inönü.jpg"
+                    alt="İsmet İnönü"
+                    class="inonu-foto"
+                >
+
+                <h3>
+                    İsmet İnönü
+                </h3>
+
+                <p>
+                    İsmet İnönü,
+                    Kurtuluş Savaşı döneminde önemli
+                    görevler üstlenmiş ve
+                    Türkiye Cumhuriyeti'nin ikinci
+                    Cumhurbaşkanı olarak görev yapmıştır.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                ⚔️ Kurtuluş Savaşı
+            </h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1919 — Samsun
+                    </h3>
+
+                    <p>
+                        Mustafa Kemal Paşa'nın
+                        Samsun'a çıkışı,
+                        Millî Mücadele'nin başlangıcında
+                        önemli bir dönüm noktası oldu.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1920 — TBMM
+                    </h3>
+
+                    <p>
+                        Türkiye Büyük Millet Meclisi
+                        Ankara'da açıldı.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1921 — Sakarya
+                    </h3>
+
+                    <p>
+                        Sakarya Meydan Muharebesi kazanıldı.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1922 — Büyük Taarruz
+                    </h3>
+
+                    <p>
+                        Büyük Taarruz ve Başkomutanlık
+                        Meydan Muharebesi ile Millî Mücadele'nin
+                        askerî safhasında belirleyici
+                        başarı elde edildi.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1923 — Cumhuriyet
+                    </h3>
+
+                    <p>
+                        Türkiye Cumhuriyeti ilan edildi.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- OSMANLI -->
+<!-- ========================================================= -->
+
+<div
+    id="osmanli"
+    class="hidden"
+>
+
+    <section class="osmanli-section">
+
+        <div class="container">
+
+            <h2>
+                ☪️ Osmanlı Devleti
+            </h2>
+
+            <div class="card osmanli-card">
+
+                <img
+                    src="fatih.jpg"
+                    alt="Fatih Sultan Mehmet"
+                    class="fatih-foto"
+                >
+
+                <h3>
+                    Fatih Sultan Mehmet
+                </h3>
+
+                <p>
+                    Fatih Sultan Mehmet,
+                    1453 yılında İstanbul'u fethederek
+                    Osmanlı tarihinin önemli
+                    hükümdarlarından biri olmuştur.
+                </p>
+
+            </div>
+
+            <div class="card osmanli-card">
+
+                <img
+                    src="yavuz.jpg"
+                    alt="Yavuz Sultan Selim"
+                    class="yavuz-foto"
+                >
+
+                <h3>
+                    Yavuz Sultan Selim
+                </h3>
+
+                <p>
+                    Yavuz Sultan Selim,
+                    Osmanlı Devleti'nin dokuzuncu
+                    padişahıdır.
+                    Kısa süren saltanatı döneminde
+                    devletin topraklarını önemli ölçüde
+                    genişletmiştir.
+                </p>
+
+            </div>
+
+            <div class="card osmanli-card">
+
+                <h3>
+                    🎵 Ceddin Deden
+                </h3>
+
+                <p>
+                    Osmanlı dönemini ve Türk askerî tarihini
+                    konu alan eserlerden biri olan
+                    Ceddin Deden'i buradan dinleyebilirsin.
+                </p>
+
+                <audio controls>
+
+                    <source
+                        src="ceddin-deden.mp3"
+                        type="audio/mpeg"
+                    >
+
+                    Tarayıcınız ses oynatmayı desteklemiyor.
+
+                </audio>
+
+            </div>
+
+            <h2>
+                📜 Osmanlı Zaman Çizelgesi
+            </h2>
+
+            <div class="osmanli-timeline">
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1299 — Osmanlı'nın Kuruluşu
+                    </h3>
+
+                    <p>
+                        Osmanlı Beyliği'nin ortaya çıkışı.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1453 — İstanbul'un Fethi
+                    </h3>
+
+                    <p>
+                        Fatih Sultan Mehmet
+                        İstanbul'u fethetti.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1517 — Mısır Seferi
+                    </h3>
+
+                    <p>
+                        Yavuz Sultan Selim döneminde
+                        Osmanlı'nın Mısır ve çevresindeki
+                        hâkimiyeti genişledi.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <h3>
+                        1922 — Saltanatın Kaldırılması
+                    </h3>
+
+                    <p>
+                        Osmanlı saltanatı kaldırıldı.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- OYUNLAR - SADECE BU KISIM GÜNCELLENDİ -->
+<!-- ========================================================= -->
+
+<div
+    id="oyunlar"
+    class="hidden"
+>
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                🎮 OYUNLAR
+            </h2>
+
+            <div class="games-container">
+
+                <!-- 1. MEVCUT OYUN: TURKMİLLETİ.EXE -->
+
+                <div class="game-card">
+
+                    <div class="game-icon">
+                        🎮
+                    </div>
+
+                    <span class="game-badge">
+                        💻 PC İÇİN
+                    </span>
+
+                    <h3>
+                        Mustafa Kemal Atatürk
+                        Bilgi Oyunu
+                    </h3>
+
+                    <p>
+                        Mustafa Kemal Atatürk ve
+                        Türk tarihi hakkında hazırlanmış
+                        bilgi oyununu bilgisayarında
+                        oynayabilirsin.
+                    </p>
+
+                    <div class="game-info">
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                🎯 Soru
+                            </strong>
+
+                            50 bilgi sorusu
+
+                        </div>
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                🚪 Sistem
+                            </strong>
+
+                            A / B kapıları
+
+                        </div>
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                📁 Dosya
+                            </strong>
+
+                            TurkMilleti.exe
+
+                        </div>
+
+                    </div>
+
+                    <div class="controls">
+
+                        <h4>
+                            🎮 Kontroller
+                        </h4>
+
+                        <p>
+
+                            <b>💻 PC:</b>
+                            WASD + Mouse
+
+                        </p>
+
+                    </div>
+
+                    <a
+                        class="game-button"
+                        href="TurkMilleti.exe"
+                        download
+                        onclick="unlockAchievement('gamer')"
+                    >
+                        🎮 TURKMİLLETİ.EXE İNDİR
+                    </a>
+
+                    <p class="game-note">
+                        ⚠️ Bu oyun bilgisayar içindir.
+                    </p>
+
+                </div>
+
+
+                <!-- 2. YENİ OYUN: TURKMİLLETİ.HTML -->
+
+                <div class="game-card">
+
+                    <div class="game-icon">
+                        🗺️
+                    </div>
+
+                    <span class="game-badge">
+                        📱💻 TÜM CİHAZLAR
+                    </span>
+
+                    <h3>
+                        Türk Milleti:
+                        Tarih Macerası
+                    </h3>
+
+                    <p>
+                        Türk tarihi temalı yeni
+                        tarayıcı oyununu bilgisayar,
+                        telefon ve tablet üzerinden
+                        oynayabilirsin.
+                    </p>
+
+                    <div class="game-info">
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                🎮 Tür
+                            </strong>
+
+                            Tarih Oyunu
+
+                        </div>
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                📱 Platform
+                            </strong>
+
+                            Tüm cihazlar
+
+                        </div>
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                📁 Dosya
+                            </strong>
+
+                            TurkMilleti.html
+
+                        </div>
+
+                    </div>
+
+                    <div class="controls">
+
+                        <h4>
+                            🎮 Kontroller
+                        </h4>
+
+                        <p>
+
+                            <b>💻 PC:</b>
+                            WASD + Mouse
+
+                            <br>
+
+                            <b>📱 Telefon:</b>
+                            Dokunmatik kontroller
+
+                            <br>
+
+                            <b>📲 Tablet:</b>
+                            Dokunmatik kontroller
+
+                        </p>
+
+                    </div>
+
+                    <a
+                        class="game-button"
+                        href="TurkMilleti.html"
+                        onclick="unlockAchievement('gamer')"
+                    >
+                        🎮 OYNA
+                    </a>
+
+                    <p class="game-note">
+                        ✅ İndirme gerektirmez.
+                        Tarayıcı üzerinden oynanır.
+                    </p>
+
+                </div>
+
+
+                <!-- 3. MEVCUT OYUN: MUZE.EXE -->
+
+                <div class="game-card">
+
+                    <div class="game-icon">
+                        🏛️
+                    </div>
+
+                    <span class="game-badge">
+                        💻 PC İÇİN
+                    </span>
+
+                    <h3>
+                        Müze
+                    </h3>
+
+                    <p>
+                        PC için hazırlanmış
+                        müze temalı oyun.
+                        Oyunu bilgisayarına indirerek
+                        çalıştırabilirsin.
+                    </p>
+
+                    <div class="game-info">
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                🎮 Platform
+                            </strong>
+
+                            PC
+
+                        </div>
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                📁 Dosya
+                            </strong>
+
+                            muze.exe
+
+                        </div>
+
+                        <div class="game-info-box">
+
+                            <strong>
+                                💻 Tür
+                            </strong>
+
+                            PC Oyunu
+
+                        </div>
+
+                    </div>
+
+                    <a
+                        class="game-button"
+                        href="muze.exe"
+                        download
+                        onclick="unlockAchievement('gamer')"
+                    >
+                        🏛️ MUZE.EXE İNDİR
+                    </a>
+
+                    <p class="game-note">
+                        ⚠️ Oyun bilgisayarda çalıştırılır.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- MODAL -->
+<!-- ========================================================= -->
+
+<div
+    id="modal"
+    class="modal hidden"
+    onclick="closeModalOutside(event)"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal()"
+        >
+            ×
+        </button>
+
+        <div
+            id="modalContent"
+        ></div>
+
+    </div>
+
+</div>
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer>
+
+    <p>
+        🇹🇷 TÜRK MİLLETİ 🇹🇷
+    </p>
+
+    <p>
+        Türk tarihine ve kültürüne saygıyla.
+    </p>
+
+</footer>
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+/* =========================================================
+   TÜM SAYFALAR
+========================================================= */
+
+const allPages = [
+    "anasayfa",
+    "zamanPage",
+    "haritaPage",
+    "quizPage",
+    "muzePage",
+    "bilgilerPage",
+    "basarilarPage",
+    "turkiye",
+    "osmanli",
+    "oyunlar"
+];
+
+function hideAllPages(){
+
+    allPages.forEach(function(id){
+
+        const element =
+            document.getElementById(id);
+
+        if(element){
+            element.classList.add("hidden");
+        }
+
+    });
+
+}
+
+function scrollTop(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+/* =========================================================
+   ANA SAYFA
+========================================================= */
+
+function showAnaSayfa(){
+
+    hideAllPages();
+
+    document
+        .getElementById("anasayfa")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("featureNav")
+        .classList.add("hidden");
+
+    scrollTop();
+
+}
+
+/* =========================================================
+   ÖZELLİK SAYFALARI
+========================================================= */
+
+function showFeature(id){
+
+    hideAllPages();
+
+    const page =
+        document.getElementById(id);
+
+    if(page){
+        page.classList.remove("hidden");
+    }
+
+    document
+        .getElementById("featureNav")
+        .classList.remove("hidden");
+
+    scrollTop();
+
+    if(id === "quizPage"){
+        startQuiz();
+    }
+
+}
+
+/* =========================================================
+   TÜRKİYE
+========================================================= */
+
+function showTurkiye(){
+
+    hideAllPages();
+
+    document
+        .getElementById("turkiye")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("featureNav")
+        .classList.remove("hidden");
+
+    scrollTop();
+
+}
+
+/* =========================================================
+   OSMANLI
+========================================================= */
+
+function showOsmanli(){
+
+    hideAllPages();
+
+    document
+        .getElementById("osmanli")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("featureNav")
+        .classList.remove("hidden");
+
+    scrollTop();
+
+}
+
+/* =========================================================
+   OYUNLAR
+========================================================= */
+
+function showOyunlar(){
+
+    hideAllPages();
+
+    document
+        .getElementById("oyunlar")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("featureNav")
+        .classList.remove("hidden");
+
+    scrollTop();
+
+}
+
+/* =========================================================
+   TEMA
+========================================================= */
+
+function toggleThemeMenu(){
+
+    document
+        .getElementById("themeMenu")
+        .classList.toggle("show");
+
+}
+
+function closeThemeMenu(){
+
+    document
+        .getElementById("themeMenu")
+        .classList.remove("show");
+
+}
+
+function setTheme(theme){
+
+    document.body.classList.remove(
+        "theme-light",
+        "theme-osmanli"
+    );
+
+    if(theme === "light"){
+
+        document.body.classList.add(
+            "theme-light"
+        );
+
+    }
+
+    if(theme === "osmanli"){
+
+        document.body.classList.add(
+            "theme-osmanli"
+        );
+
+    }
+
+    localStorage.setItem(
+        "siteTheme",
+        theme
+    );
+
+    closeThemeMenu();
+
+}
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const menu =
+            document.getElementById(
+                "themeMenu"
+            );
+
+        const button =
+            document.querySelector(
+                ".theme-button"
+            );
+
+        if(
+            menu &&
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ){
+
+            closeThemeMenu();
+
+        }
+
+    }
+);
+
+/* =========================================================
+   ZAMAN MAKİNESİ
+========================================================= */
+
+const timeData = [
+
+    {
+        year:"M.Ö. 209",
+        title:"Büyük Hun İmparatorluğu",
+        text:
+        "Türk tarihindeki erken büyük devlet geleneklerinden biri olan Büyük Hun İmparatorluğu dönemi."
+    },
+
+    {
+        year:"552",
+        title:"Göktürk Kağanlığı",
+        text:
+        "Göktürk Kağanlığı ile Türk devlet geleneğinde Göktürk adı tarih sahnesinde önemli bir yer kazandı."
+    },
+
+    {
+        year:"1071",
+        title:"Malazgirt",
+        text:
+        "Malazgirt Zaferi, Anadolu'nun Türklerin yerleşimine açılmasında önemli tarihî dönüm noktalarından biridir."
+    },
+
+    {
+        year:"1299",
+        title:"Osmanlı Dönemi",
+        text:
+        "Osmanlı Beyliği'nin ortaya çıktığı ve zamanla büyük bir devlete dönüştüğü kuruluş dönemi."
+    },
+
+    {
+        year:"1453",
+        title:"İstanbul'un Fethi",
+        text:
+        "Fatih Sultan Mehmet'in İstanbul'u fethetmesi Osmanlı tarihinin önemli dönüm noktalarından biri oldu."
+    },
+
+    {
+        year:"1919",
+        title:"Samsun ve Millî Mücadele",
+        text:
+        "Mustafa Kemal Paşa'nın Samsun'a çıkışı Millî Mücadele sürecinin önemli başlangıç noktalarındandır."
+    },
+
+    {
+        year:"1920",
+        title:"TBMM'nin Açılması",
+        text:
+        "Türkiye Büyük Millet Meclisi Ankara'da açıldı ve Millî Mücadele'nin yönetim merkezlerinden biri oldu."
+    },
+
+    {
+        year:"1921",
+        title:"Sakarya Meydan Muharebesi",
+        text:
+        "Sakarya Meydan Muharebesi Millî Mücadele'nin önemli askerî başarılarından biridir."
+    },
+
+    {
+        year:"1922",
+        title:"Büyük Taarruz",
+        text:
+        "Büyük Taarruz ve Başkomutanlık Meydan Muharebesi, Millî Mücadele'nin askerî safhasında belirleyici gelişmelerdendir."
+    },
+
+    {
+        year:"1923",
+        title:"Cumhuriyet",
+        text:
+        "Türkiye Cumhuriyeti ilan edildi ve Mustafa Kemal Atatürk ilk Cumhurbaşkanı oldu."
+    }
+
+];
+
+function createTimeButtons(){
+
+    const box =
+        document.getElementById(
+            "timeButtons"
+        );
+
+    box.innerHTML = "";
+
+    timeData.forEach(
+        function(item,index){
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "time-button";
+
+            button.textContent =
+                item.year;
+
+            button.onclick =
+                function(){
+
+                    showTimePeriod(index);
+
+                };
+
+            box.appendChild(button);
+
+        }
+    );
+
+}
+
+function showTimePeriod(index){
+
+    const item =
+        timeData[index];
+
+    document
+        .getElementById("timeResult")
+        .innerHTML =
+
+        `
+            <h3>
+                ${item.year} — ${item.title}
+            </h3>
+
+            <p>
+                ${item.text}
+            </p>
+        `;
+
+    document
+        .querySelectorAll(".time-button")
+        .forEach(
+            function(button,buttonIndex){
+
+                button.classList.toggle(
+                    "active",
+                    buttonIndex === index
+                );
+
+            }
+        );
+
+    unlockAchievement("time");
+
+}
+
+/* =========================================================
+   HARİTA
+========================================================= */
+
+const cityData = [
+
+    {
+        name:"İstanbul",
+        x:210,
+        y:205,
+        info:
+        "İstanbul, 1453 yılında Fatih Sultan Mehmet tarafından fethedildi ve Osmanlı Devleti'nin en önemli şehirlerinden biri oldu."
+    },
+
+    {
+        name:"Bursa",
+        x:275,
+        y:240,
+        info:
+        "Bursa, Osmanlı Devleti'nin erken dönemindeki önemli merkez ve başkentlerinden biridir."
+    },
+
+    {
+        name:"Ankara",
+        x:500,
+        y:250,
+        info:
+        "Ankara, Millî Mücadele döneminde önemli bir merkez oldu ve TBMM'nin açılmasıyla yeni Türk devletinin yönetim merkezi hâline geldi."
+    },
+
+    {
+        name:"Samsun",
+        x:570,
+        y:165,
+        info:
+        "Samsun, Mustafa Kemal Paşa'nın 19 Mayıs 1919'da çıktığı şehir olarak Millî Mücadele tarihinde önemli yere sahiptir."
+    },
+
+    {
+        name:"Sivas",
+        x:520,
+        y:215,
+        info:
+        "Sivas, 1919 yılında düzenlenen Sivas Kongresi nedeniyle Millî Mücadele tarihinde önemli bir yere sahiptir."
+    },
+
+    {
+        name:"Erzurum",
+        x:675,
+        y:210,
+        info:
+        "Erzurum, 1919 yılında gerçekleştirilen Erzurum Kongresi nedeniyle Millî Mücadele tarihinde önemli bir merkezdir."
+    },
+
+    {
+        name:"Çanakkale",
+        x:150,
+        y:285,
+        info:
+        "Çanakkale, I. Dünya Savaşı sırasında gerçekleşen Çanakkale Muharebeleri ile Türk tarihinin önemli savaş alanlarından biridir."
+    },
+
+    {
+        name:"Edirne",
+        x:150,
+        y:215,
+        info:
+        "Edirne, Osmanlı Devleti'nin önemli şehirlerinden biri olmuş ve İstanbul'un fethinden önce başkentlik yapmıştır."
+    },
+
+    {
+        name:"İzmir",
+        x:170,
+        y:315,
+        info:
+        "İzmir, Millî Mücadele'nin son dönemindeki gelişmeler açısından önemli şehirlerden biridir."
+    },
+
+    {
+        name:"Konya",
+        x:410,
+        y:300,
+        info:
+        "Konya, Anadolu tarihinin önemli şehirlerinden biri ve Selçuklu döneminde önemli bir merkezdir."
+    }
+
+];
+
+function createMap(){
+
+    const markerLayer =
+        document.getElementById(
+            "mapMarkers"
+        );
+
+    const cityBox =
+        document.getElementById(
+            "cityButtons"
+        );
+
+    markerLayer.innerHTML = "";
+    cityBox.innerHTML = "";
+
+    cityData.forEach(
+        function(city){
+
+            const circle =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "circle"
+                );
+
+            circle.setAttribute(
+                "cx",
+                city.x
+            );
+
+            circle.setAttribute(
+                "cy",
+                city.y
+            );
+
+            circle.setAttribute(
+                "r",
+                "9"
+            );
+
+            circle.setAttribute(
+                "class",
+                "map-marker"
+            );
+
+            circle.addEventListener(
+                "click",
+                function(){
+
+                    showCity(city);
+
+                }
+            );
+
+            markerLayer.appendChild(
+                circle
+            );
+
+            const label =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "text"
+                );
+
+            label.setAttribute(
+                "x",
+                city.x + 11
+            );
+
+            label.setAttribute(
+                "y",
+                city.y - 10
+            );
+
+            label.setAttribute(
+                "class",
+                "map-label"
+            );
+
+            label.textContent =
+                city.name;
+
+            markerLayer.appendChild(
+                label
+            );
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "city-button";
+
+            button.textContent =
+                city.name;
+
+            button.onclick =
+                function(){
+
+                    showCity(city);
+
+                };
+
+            cityBox.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+function showCity(city){
+
+    document
+        .getElementById("cityInfo")
+        .innerHTML =
+
+        `
+            <h3>
+                🗺️ ${city.name}
+            </h3>
+
+            <p>
+                ${city.info}
+            </p>
+        `;
+
+    unlockAchievement("map");
+
+}
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+const quizQuestions = [
+
+    {
+        question:
+        "Türkiye Cumhuriyeti hangi tarihte ilan edildi?",
+
+        answers:[
+            "23 Nisan 1920",
+            "29 Ekim 1923",
+            "19 Mayıs 1919",
+            "30 Ağustos 1922"
+        ],
+
+        correct:1
+    },
+
+    {
+        question:
+        "Mustafa Kemal Paşa Millî Mücadele'nin başlangıcında hangi şehre çıktı?",
+
+        answers:[
+            "Samsun",
+            "İzmir",
+            "Bursa",
+            "Edirne"
+        ],
+
+        correct:0
+    },
+
+    {
+        question:
+        "Türkiye Büyük Millet Meclisi hangi şehirde açıldı?",
+
+        answers:[
+            "İstanbul",
+            "Samsun",
+            "Ankara",
+            "Sivas"
+        ],
+
+        correct:2
+    },
+
+    {
+        question:
+        "İstanbul'u 1453 yılında fetheden Osmanlı padişahı kimdir?",
+
+        answers:[
+            "Yavuz Sultan Selim",
+            "Fatih Sultan Mehmet",
+            "Kanuni Sultan Süleyman",
+            "II. Bayezid"
+        ],
+
+        correct:1
+    },
+
+    {
+        question:
+        "İstiklâl Marşı'nın şairi kimdir?",
+
+        answers:[
+            "Mehmet Âkif Ersoy",
+            "Yahya Kemal Beyatlı",
+            "Tevfik Fikret",
+            "Namık Kemal"
+        ],
+
+        correct:0
+    },
+
+    {
+        question:
+        "Sakarya Meydan Muharebesi hangi yıl gerçekleşti?",
+
+        answers:[
+            "1919",
+            "1920",
+            "1921",
+            "1923"
+        ],
+
+        correct:2
+    },
+
+    {
+        question:
+        "Türkiye Cumhuriyeti'nin ilk Cumhurbaşkanı kimdir?",
+
+        answers:[
+            "İsmet İnönü",
+            "Mustafa Kemal Atatürk",
+            "Kazım Karabekir",
+            "Fevzi Çakmak"
+        ],
+
+        correct:1
+    },
+
+    {
+        question:
+        "Osmanlı Devleti'nin önemli erken dönem başkentlerinden biri hangisidir?",
+
+        answers:[
+            "Bursa",
+            "Ankara",
+            "Sivas",
+            "Samsun"
+        ],
+
+        correct:0
+    },
+
+    {
+        question:
+        "Yavuz Sultan Selim Osmanlı'nın kaçıncı padişahıdır?",
+
+        answers:[
+            "7.",
+            "8.",
+            "9.",
+            "10."
+        ],
+
+        correct:2
+    },
+
+    {
+        question:
+        "İsmet İnönü Türkiye Cumhuriyeti'nin kaçıncı Cumhurbaşkanıdır?",
+
+        answers:[
+            "1.",
+            "2.",
+            "3.",
+            "4."
+        ],
+
+        correct:1
+    }
+
+];
+
+let currentQuestion = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function startQuiz(){
+
+    currentQuestion = 0;
+    quizScore = 0;
+    quizAnswered = false;
+
+    renderQuiz();
+
+    unlockAchievement("quizStart");
+
+}
+
+function renderQuiz(){
+
+    const question =
+        quizQuestions[currentQuestion];
+
+    document
+        .getElementById("quizCounter")
+        .textContent =
+        `Soru ${currentQuestion + 1} / ${quizQuestions.length}`;
+
+    document
+        .getElementById("quizScore")
+        .textContent =
+        `Puan: ${quizScore}`;
+
+    document
+        .getElementById("quizContent")
+        .innerHTML =
+
+        `
+            <div class="question">
+                ${question.question}
+            </div>
+
+            <div class="answers">
+
+                ${question.answers.map(
+                    function(answer,index){
+
+                        return `
+                            <button
+                                class="answer-button"
+                                onclick="answerQuiz(${index})"
+                            >
+                                ${String.fromCharCode(65 + index)})
+                                ${answer}
+                            </button>
+                        `;
+
+                    }
+                ).join("")}
+
+            </div>
+        `;
+
+    quizAnswered = false;
+
+}
+
+function answerQuiz(index){
+
+    if(quizAnswered){
+        return;
+    }
+
+    quizAnswered = true;
+
+    const question =
+        quizQuestions[currentQuestion];
+
+    const buttons =
+        document.querySelectorAll(
+            ".answer-button"
+        );
+
+    buttons.forEach(
+        function(button,buttonIndex){
+
+            button.disabled = true;
+
+            if(
+                buttonIndex ===
+                question.correct
+            ){
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+            if(
+                buttonIndex === index &&
+                buttonIndex !==
+                question.correct
+            ){
+
+                button.classList.add(
+                    "wrong"
+                );
+
+            }
+
+        }
+    );
+
+    if(
+        index ===
+        question.correct
+    ){
+
+        quizScore++;
+
+    }
+
+    document
+        .getElementById("quizScore")
+        .textContent =
+        `Puan: ${quizScore}`;
+
+    setTimeout(
+        function(){
+
+            currentQuestion++;
+
+            if(
+                currentQuestion <
+                quizQuestions.length
+            ){
+
+                renderQuiz();
+
+            }
+            else{
+
+                finishQuiz();
+
+            }
+
+        },
+        700
+    );
+
+}
+
+function finishQuiz(){
+
+    document
+        .getElementById("quizCounter")
+        .textContent =
+        "Soru 10 / 10";
+
+    document
+        .getElementById("quizContent")
+        .innerHTML =
+
+        `
+            <div class="quiz-result">
+
+                <h3>
+                    🏆 Yarışma Bitti!
+                </h3>
+
+                <p>
+                    10 sorudan
+                    <b>${quizScore}</b>
+                    doğru yaptın.
+                </p>
+
+                <p>
+                    Toplam puan:
+                    <b>${quizScore * 10}</b>
+                </p>
+
+                <button
+                    class="quiz-button"
+                    onclick="startQuiz()"
+                >
+                    🔄 Tekrar Oyna
+                </button>
+
+            </div>
+        `;
+
+    unlockAchievement("quiz");
+
+    if(
+        quizScore ===
+        quizQuestions.length
+    ){
+
+        unlockAchievement("perfect");
+
+    }
+
+}
+
+/* =========================================================
+   SANAL MÜZE
+========================================================= */
+
+const museumData = {
+
+    ataturk:{
+        title:"🖼️ Atatürk Köşesi",
+        text:
+        "Mustafa Kemal Atatürk, Millî Mücadele'nin önderi ve Türkiye Cumhuriyeti'nin kurucusudur.",
+        image:"MustafaKemal.jpg"
+    },
+
+    istiklal:{
+        title:"📜 İstiklâl Marşı",
+        text:
+        "Mehmet Âkif Ersoy tarafından yazılan İstiklâl Marşı, Türkiye'nin millî marşıdır.",
+        image:"mehmet.jpg"
+    },
+
+    fatih:{
+        title:"🏰 İstanbul'un Fethi",
+        text:
+        "Fatih Sultan Mehmet'in 1453 yılında İstanbul'u fethetmesi Osmanlı tarihinin önemli dönüm noktalarından biridir.",
+        image:"fatih.jpg"
+    },
+
+    yavuz:{
+        title:"⚔️ Yavuz Sultan Selim",
+        text:
+        "Yavuz Sultan Selim, Osmanlı Devleti'nin dokuzuncu padişahıdır.",
+        image:"yavuz.jpg"
+    },
+
+    meclis:{
+        title:"🏛️ TBMM",
+        text:
+        "Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açıldı ve Millî Mücadele'nin yönetim merkezlerinden biri oldu.",
+        image:null
+    },
+
+    kurtulus:{
+        title:"🎖️ Millî Mücadele",
+        text:
+        "1919–1922 dönemindeki Millî Mücadele, Türkiye Cumhuriyeti'nin kuruluşuna giden sürecin temel parçalarındandır.",
+        image:null
+    }
+
+};
+
+function openMuseumItem(id){
+
+    const item =
+        museumData[id];
+
+    let imageHTML = "";
+
+    if(item.image){
+
+        imageHTML =
+
+        `
+            <img
+                src="${item.image}"
+                alt="${item.title}"
+                style="
+                    display:block;
+                    width:220px;
+                    max-width:100%;
+                    margin:0 auto 18px;
+                    border-radius:12px;
+                    box-shadow:0 6px 20px rgba(0,0,0,.4);
+                "
+            >
+        `;
+
+    }
+
+    document
+        .getElementById("modalContent")
+        .innerHTML =
+
+        `
+            ${imageHTML}
+
+            <h3>
+                ${item.title}
+            </h3>
+
+            <p>
+                ${item.text}
+            </p>
+        `;
+
+    document
+        .getElementById("modal")
+        .classList
+        .remove("hidden");
+
+    unlockAchievement("museum");
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList
+        .add("hidden");
+
+}
+
+function closeModalOutside(event){
+
+    if(
+        event.target.id ===
+        "modal"
+    ){
+
+        closeModal();
+
+    }
+
+}
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+/* =========================================================
+   RASTGELE BİLGİLER
+========================================================= */
+
+const facts = [
+
+    "Mustafa Kemal Atatürk Türkiye Cumhuriyeti'nin ilk Cumhurbaşkanıdır.",
+
+    "Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açılmıştır.",
+
+    "İstiklâl Marşı'nın şairi Mehmet Âkif Ersoy'dur.",
+
+    "Fatih Sultan Mehmet 1453 yılında İstanbul'u fethetmiştir.",
+
+    "Sivas Kongresi 1919 yılında gerçekleştirilmiştir.",
+
+    "Erzurum Kongresi 1919 yılında gerçekleştirilmiştir.",
+
+    "Yavuz Sultan Selim Osmanlı Devleti'nin dokuzuncu padişahıdır.",
+
+    "Türkiye Cumhuriyeti 29 Ekim 1923 tarihinde ilan edilmiştir.",
+
+    "İsmet İnönü Türkiye Cumhuriyeti'nin ikinci Cumhurbaşkanıdır.",
+
+    "Bursa Osmanlı Devleti'nin erken döneminde önemli bir merkez ve başkent olmuştur.",
+
+    "Samsun 19 Mayıs 1919 tarihi nedeniyle Millî Mücadele'nin önemli şehirlerinden biridir.",
+
+    "Sakarya Meydan Muharebesi 1921 yılında gerçekleşmiştir."
+
+];
+
+function showRandomFact(){
+
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            facts.length
+        );
+
+    document
+        .getElementById("factText")
+        .textContent =
+        facts[randomIndex];
+
+}
+
+/* =========================================================
+   BAŞARILAR
+========================================================= */
+
+const achievements = {
+
+    firstVisit:{
+        icon:"🇹🇷",
+        title:"İlk Ziyaret",
+        text:"Siteyi ilk kez ziyaret ettin."
+    },
+
+    time:{
+        icon:"⏳",
+        title:"Zaman Yolcusu",
+        text:"Zaman makinesini kullandın."
+    },
+
+    map:{
+        icon:"🗺️",
+        title:"Harita Kaşifi",
+        text:"Tarihî bir şehir inceledin."
+    },
+
+    quizStart:{
+        icon:"🧠",
+        title:"Meraklı Tarihçi",
+        text:"Bilgi yarışmasına başladın."
+    },
+
+    quiz:{
+        icon:"🏆",
+        title:"Bilgi Yarışçısı",
+        text:"Bir yarışmayı tamamladın."
+    },
+
+    perfect:{
+        icon:"👑",
+        title:"Tarih Ustası",
+        text:"Tüm quiz sorularını doğru yaptın."
+    },
+
+    museum:{
+        icon:"🏛️",
+        title:"Müze Gezgini",
+        text:"Sanal müzede bir eser inceledin."
+    },
+
+    gamer:{
+        icon:"🎮",
+        title:"Oyuncu",
+        text:"Oyunlar bölümündeki bir oyuna tıkladın."
+    }
+
+};
+
+function unlockAchievement(key){
+
+    if(
+        !achievements[key]
+    ){
+
+        return;
+
+    }
+
+    const storage =
+        "achievement_" +
+        key;
+
+    if(
+        localStorage.getItem(storage)
+        !== "true"
+    ){
+
+        localStorage.setItem(
+            storage,
+            "true"
+        );
+
+        renderAchievements();
+
+    }
+
+}
+
+function renderAchievements(){
+
+    const grid =
+        document.getElementById(
+            "achievementsGrid"
+        );
+
+    if(!grid){
+        return;
+    }
+
+    grid.innerHTML = "";
+
+    Object.keys(
+        achievements
+    ).forEach(
+        function(key){
+
+            const achievement =
+                achievements[key];
+
+            const unlocked =
+                localStorage.getItem(
+                    "achievement_" +
+                    key
+                ) === "true";
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "achievement " +
+                (
+                    unlocked
+                    ? "unlocked"
+                    : "locked"
+                );
+
+            div.innerHTML =
+
+            `
+                <div class="achievement-icon">
+                    ${achievement.icon}
+                </div>
+
+                <h4>
+                    ${achievement.title}
+                </h4>
+
+                <p>
+                    ${achievement.text}
+                </p>
+
+                <small>
+                    ${
+                        unlocked
+                        ? "✅ Açıldı"
+                        : "🔒 Kilitli"
+                    }
+                </small>
+            `;
+
+            grid.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+/* =========================================================
+   ARAMA
+========================================================= */
+
+const searchIndex = [
+
+    {
+        label:"Zaman Makinesi",
+        page:"zamanPage",
+        keywords:"zaman makinesi tarih yıl 209 552 1071 1299 1453 1919 1920 1921 1922 1923"
+    },
+
+    {
+        label:"Tarihî Şehirler Haritası",
+        page:"haritaPage",
+        keywords:"harita şehir istanbul ankara samsun sivas erzurum bursa edirne izmir konya çanakkale"
+    },
+
+    {
+        label:"Bilgi Yarışması",
+        page:"quizPage",
+        keywords:"quiz yarışma bilgi soru cevap puan"
+    },
+
+    {
+        label:"Sanal Müze",
+        page:"muzePage",
+        keywords:"müze sanal müze atatürk istiklal fatih yavuz tbmm"
+    },
+
+    {
+        label:"Rastgele Tarih Bilgileri",
+        page:"bilgilerPage",
+        keywords:"bilgi tarih bilgi kartı"
+    },
+
+    {
+        label:"Başarılar",
+        page:"basarilarPage",
+        keywords:"başarı rozet oyuncu tarihçi"
+    },
+
+    {
+        label:"Türkiye — Atatürk",
+        page:"turkiye",
+        keywords:"atatürk mustafa kemal cumhuriyet"
+    },
+
+    {
+        label:"Türkiye — İstiklâl Marşı",
+        page:"turkiye",
+        keywords:"istiklal marşı mehmet akif ersoy"
+    },
+
+    {
+        label:"Türkiye — İsmet İnönü",
+        page:"turkiye",
+        keywords:"ismet inönü ikinci cumhurbaşkanı"
+    },
+
+    {
+        label:"Türkiye — Kurtuluş Savaşı",
+        page:"turkiye",
+        keywords:"kurtuluş savaşı samsun tbmm sakarya büyük taarruz"
+    },
+
+    {
+        label:"Osmanlı — Fatih Sultan Mehmet",
+        page:"osmanli",
+        keywords:"fatih sultan mehmet istanbul fetih 1453"
+    },
+
+    {
+        label:"Osmanlı — Yavuz Sultan Selim",
+        page:"osmanli",
+        keywords:"yavuz sultan selim padişah"
+    },
+
+    {
+        label:"Osmanlı — Zaman Çizelgesi",
+        page:"osmanli",
+        keywords:"osmanlı 1299 1453 1517 1922 zaman çizelgesi"
+    },
+
+    {
+        label:"Oyunlar — TurkMilleti.exe",
+        page:"oyunlar",
+        keywords:"turkmilleti.exe atatürk bilgi oyunu pc oyun"
+    },
+
+    {
+        label:"Oyunlar — TurkMilleti.html",
+        page:"oyunlar",
+        keywords:"turkmilleti.html tarih macerası tarayıcı oyun tüm cihazlar telefon tablet bilgisayar"
+    },
+
+    {
+        label:"Oyunlar — muze.exe",
+        page:"oyunlar",
+        keywords:"muze.exe müze pc oyunu"
+    }
+
+];
+
+function normalize(text){
+
+    return text
+        .toLocaleLowerCase("tr-TR")
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
+
+}
+
+function handleSearchKey(event){
+
+    if(
+        event.key === "Enter"
+    ){
+
+        searchSite();
+
+    }
+
+}
+
+function searchSite(){
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const query =
+        input.value.trim();
+
+    const resultBox =
+        document.getElementById(
+            "searchResults"
+        );
+
+    if(!query){
+
+        resultBox.classList.remove("show");
+        resultBox.innerHTML = "";
+
+        return;
+
+    }
+
+    const q =
+        normalize(query);
+
+    const matches =
+        searchIndex
+            .filter(
+                function(item){
+
+                    return(
+                        normalize(item.keywords)
+                            .includes(q)
+                        ||
+                        normalize(item.label)
+                            .includes(q)
+                    );
+
+                }
+            )
+            .slice(0,8);
+
+    if(
+        matches.length === 0
+    ){
+
+        resultBox.innerHTML =
+
+        `
+            <div class="search-results-title">
+                🔎 "${query}" için sonuç bulunamadı.
+            </div>
+        `;
+
+        resultBox.classList.add("show");
+
+        return;
+
+    }
+
+    resultBox.innerHTML =
+
+    `
+        <div class="search-results-title">
+            🔎 ${matches.length} sonuç bulundu
+        </div>
+    `;
+
+    matches.forEach(
+        function(item){
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "search-result";
+
+            button.textContent =
+                item.label;
+
+            button.onclick =
+                function(){
+
+                    openSearchResult(item);
+
+                };
+
+            resultBox.appendChild(
+                button
+            );
+
+        }
+    );
+
+    resultBox.classList.add("show");
+
+}
+
+function openSearchResult(item){
+
+    document
+        .getElementById(
+            "searchResults"
+        )
+        .classList
+        .remove("show");
+
+    if(
+        item.page === "zamanPage" ||
+        item.page === "haritaPage" ||
+        item.page === "quizPage" ||
+        item.page === "muzePage" ||
+        item.page === "bilgilerPage" ||
+        item.page === "basarilarPage"
+    ){
+
+        showFeature(
+            item.page
+        );
+
+        return;
+
+    }
+
+    if(
+        item.page === "turkiye"
+    ){
+
+        showTurkiye();
+
+        return;
+
+    }
+
+    if(
+        item.page === "osmanli"
+    ){
+
+        showOsmanli();
+
+        return;
+
+    }
+
+    if(
+        item.page === "oyunlar"
+    ){
+
+        showOyunlar();
+
+        return;
+
+    }
+
+}
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const results =
+            document.getElementById(
+                "searchResults"
+            );
+
+        const input =
+            document.getElementById(
+                "searchInput"
+            );
+
+        if(
+            results &&
+            !results.contains(event.target) &&
+            event.target !== input &&
+            !event.target.classList.contains(
+                "search-button"
+            )
+        ){
+
+            results.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+/* =========================================================
+   BAŞLANGIÇ
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        createTimeButtons();
+
+        createMap();
+
+        showRandomFact();
+
+        renderAchievements();
+
+        if(
+            !localStorage.getItem(
+                "achievement_firstVisit"
+            )
+        ){
+
+            localStorage.setItem(
+                "achievement_firstVisit",
+                "true"
+            );
+
+        }
+
+        const savedTheme =
+            localStorage.getItem(
+                "siteTheme"
+            ) || "dark";
+
+        setTheme(
+            savedTheme
+        );
+
+        renderAchievements();
+
+        showAnaSayfa();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
